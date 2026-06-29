@@ -15,14 +15,16 @@
 </head>
 <body class="bg-gray-900 text-gray-100 font-sans antialiased">
 
+    <!-- Header -->
     <header class="border-b border-gray-800 bg-gray-900/80 backdrop-blur sticky top-0 z-50">
         <div class="max-w-6xl mx-auto px-4 py-4 flex flex-col md:flex-row justify-between items-center gap-4">
             <div>
                 <h1 class="text-2xl font-bold bg-gradient-to-r from-blue-400 via-indigo-400 to-purple-400 bg-clip-text text-transparent">
                     Frontend to Backend Master Roadmap
                 </h1>
-                <p class="text-sm text-gray-400 mt-1">Chiến lược 3 tiếng/ngày • Học song ngữ cùng AI • Làm chủ .NET & ABP Multi-Tenancy</p>
+                <p class="text-sm text-gray-400 mt-1">Strategic 3h/day • Learn with AI • Master .NET & ABP Multi-Tenancy</p>
             </div>
+            <!-- Progress Tracker -->
             <div class="w-full md:w-72 bg-gray-800 rounded-full h-5 relative overflow-hidden border border-gray-700 shadow-inner">
                 <div id="progress" class="bg-gradient-to-r from-blue-500 via-indigo-500 to-purple-500 h-full w-0 progress-bar"></div>
                 <span id="progress-text" class="absolute inset-0 flex items-center justify-center text-xs font-bold text-white drop-shadow">0% Complete</span>
@@ -30,8 +32,10 @@
         </div>
     </header>
 
+    <!-- Main Content -->
     <main class="max-w-6xl mx-auto px-4 py-8 grid grid-cols-1 lg:grid-cols-4 gap-8">
         
+        <!-- Sidebar Navigation -->
         <aside class="lg:col-span-1">
             <div class="sticky top-24 space-y-2 bg-gray-800/40 p-4 rounded-xl border border-gray-800">
                 <h3 class="text-xs font-semibold text-gray-400 uppercase tracking-wider px-3 mb-3">Các chặng đường</h3>
@@ -63,62 +67,57 @@
             </div>
         </aside>
 
+        <!-- Content Area -->
         <section class="lg:col-span-3 space-y-6">
             
+            <!-- Global AI Tools -->
             <div class="bg-gradient-to-r from-slate-800 via-gray-800 to-slate-800 border border-gray-700 rounded-xl p-5 shadow-lg">
                 <div class="flex items-center gap-2 mb-2">
-                    <i class="fa-solid fa-robot text-purple-400 text-lg"></i>
-                    <h2 class="text-base font-bold text-white">AI Gia Sư Song Ngữ (Học không sợ cùi Tiếng Anh)</h2>
+                    <i class="fa-solid0 fa-robot text-purple-400 text-lg"></i>
+                    <h2 class="text-base font-bold text-white">Trợ Lý Gỡ Lỗi Toàn Cầu</h2>
                 </div>
-                <p class="text-xs text-gray-400 mb-4">Click vào các hộp dưới đây để copy prompt chuyên dụng, ép AI dạy theo phong cách đối chiếu Eng-Viet:</p>
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
-                    <button onclick="copyPrompt('setup')" class="text-left bg-gray-900 hover:bg-black p-3 rounded-lg border border-gray-700 text-xs text-gray-300 transition flex justify-between items-center group">
-                        <span><strong class="text-blue-400">1. Lý thuyết mới:</strong> Dạy đối chiếu song ngữ</span>
-                        <i class="fa-regular fa-copy opacity-60 group-hover:opacity-100 ml-2"></i>
-                    </button>
-                    <button onclick="copyPrompt('error')" class="text-left bg-gray-900 hover:bg-black p-3 rounded-lg border border-gray-700 text-xs text-gray-300 transition flex justify-between items-center group">
-                        <span><strong class="text-purple-400">2. Gỡ lỗi (Debug):</strong> Giải thích lỗi Eng-Viet</span>
-                        <i class="fa-regular fa-copy opacity-60 group-hover:opacity-100 ml-2"></i>
-                    </button>
-                </div>
+                <p class="text-xs text-gray-400 mb-3">Copy câu lệnh này khi code của bạn gặp lỗi biên dịch hoặc lỗi runtime:</p>
+                <button onclick="copyGlobalErrorPrompt()" class="w-full text-left bg-gray-900 hover:bg-black p-3 rounded-lg border border-gray-700 text-xs text-gray-300 transition flex justify-between items-center group">
+                    <span><strong class="text-purple-400"><i class="fa-solid fa-bug-slash mr-1"></i> Lệnh giải thích Bug:</strong> Đưa log lỗi tiếng Anh, nhận hướng dẫn sửa bằng tiếng Việt</span>
+                    <i class="fa-regular fa-copy opacity-60 group-hover:opacity-100 ml-2"></i>
+                </button>
             </div>
 
+            <!-- CHẶNG 1 -->
             <div id="phase1" class="tab-content active space-y-4">
                 <h2 class="text-xl font-bold text-blue-400 flex items-center gap-2">Chặng 1: C# & .NET Core Nền Tảng Chi Tiết <span class="text-xs bg-blue-950 text-blue-300 font-normal px-2.5 py-0.5 rounded-full">Ngày 1 - 21</span></h2>
                 <div class="space-y-3" id="list-phase1"></div>
             </div>
 
+            <!-- CHẶNG 2 -->
             <div id="phase2" class="tab-content space-y-4">
                 <h2 class="text-xl font-bold text-emerald-400 flex items-center gap-2">Chặng 2: Cơ Sở Dữ Liệu & EF Core Chi Tiết <span class="text-xs bg-emerald-950 text-emerald-300 font-normal px-2.5 py-0.5 rounded-full">Ngày 22 - 42</span></h2>
                 <div class="space-y-3" id="list-phase2"></div>
             </div>
 
+            <!-- CHẶNG 3 -->
             <div id="phase3" class="tab-content space-y-4">
                 <h2 class="text-xl font-bold text-amber-400 flex items-center gap-2">Chặng 3: Làm Chủ ABP Framework & DDD Chi Tiết <span class="text-xs bg-amber-950 text-amber-300 font-normal px-2.5 py-0.5 rounded-full">Ngày 43 - 70</span></h2>
                 <div class="space-y-3" id="list-phase3"></div>
             </div>
 
+            <!-- CHẶNG 4 -->
             <div id="phase4" class="tab-content space-y-4">
                 <h2 class="text-xl font-bold text-fuchsia-400 flex items-center gap-2">Chặng 4: Kiến Trúc Đa Người Thuê (Multi-Tenancy) Chi Tiết <span class="text-xs bg-fuchsia-950 text-fuchsia-300 font-normal px-2.5 py-0.5 rounded-full">Ngày 71 - 84</span></h2>
                 <div class="space-y-3" id="list-phase4"></div>
             </div>
 
+            <!-- CHẶNG 5 -->
             <div id="phase5" class="tab-content space-y-4">
                 <h2 class="text-xl font-bold text-red-400 flex items-center gap-2">Chặng 5: Đồ Án Tốt Nghiệp SaaS <span class="text-xs bg-red-950 text-red-300 font-normal px-2.5 py-0.5 rounded-full">Tuần 13 - 14</span></h2>
                 <div class="bg-gray-800 border border-gray-700 p-5 rounded-xl space-y-4">
                     <p class="text-sm leading-relaxed">
                         <strong class="text-white block text-base mb-2"><i class="fa-solid fa-trophy text-amber-400 mr-1"></i> Thử Thách Cuối Cùng: Hệ thống Kiot Bán Hàng SaaS</strong>
-                        Vận dụng toàn bộ kiến thức để tạo một hệ thống Backend hoàn chỉnh sử dụng <strong>ABP Framework (.NET 8)</strong> với các tiêu chuẩn:
+                        Vận dụng toàn bộ kiến thức để tạo một hệ thống Backend hoàn chỉnh sử dụng <strong>ABP Framework (.NET 8)</strong> với các tiêu chuẩn SaaS cao cấp.
                     </p>
-                    <ul class="text-xs text-gray-400 list-disc list-inside space-y-1.5 pl-2">
-                        <li>Cấu hình Tenant tự động nhận diện qua Subdomain hoặc Custom Header.</li>
-                        <li>Phân tách cơ sở dữ liệu: Gói Vàng chạy Database biệt lập, gói Bạc chạy chung Database lọc qua cột <code class="text-purple-400">TenantId</code>.</li>
-                        <li>Hệ thống phân quyền (Permissions): Nhân viên thu ngân chỉ thấy màn hình bán hàng, quản trị viên Tenant thấy báo cáo doanh thu.</li>
-                        <li>Kết nối trực tiếp mã nguồn Frontend (React/Angular) của bạn vào để tạo thành sản phẩm thực tế chạy mượt mà.</li>
-                    </ul>
                     <div class="flex items-center gap-2 pt-3 border-t border-gray-700">
                         <input type="checkbox" id="capstone-project" class="w-4 h-4 rounded text-blue-600 bg-gray-900 border-gray-700" onchange="updateProgress()">
-                        <label for="capstone-project" class="text-xs text-gray-200 font-bold cursor-pointer">Tôi đã hoàn thành xuất sắc đồ án và sẵn sàng ứng tuyển vị trí Fullstack / Backend .NET!</label>
+                        <label for="capstone-project" class="text-xs text-gray-200 font-bold cursor-pointer">Tôi đã hoàn thành xuất sắc đồ án và sẵn sàng cắm Frontend vào!</label>
                     </div>
                 </div>
             </div>
@@ -126,70 +125,134 @@
         </section>
     </main>
 
-    <div id="toast" class="fixed bottom-5 right-5 bg-emerald-600 text-white text-xs font-bold px-4 py-2.5 rounded-lg shadow-lg opacity-0 pointer-events-none transition-opacity duration-300 z-50">
-        <i class="fa-solid fa-check mr-1"></i> Đã sao chép câu lệnh vào bộ nhớ tạm!
+    <!-- Prompt Modal Popup -->
+    <div id="prompt-modal" class="fixed inset-0 bg-black/70 backdrop-blur-sm flex items-center justify-center hidden z-50 p-4">
+        <div class="bg-gray-850 bg-gray-800 border border-gray-700 w-full max-w-xl rounded-xl shadow-2xl p-6 space-y-4 animate-in fade-in zoom-in-95 duration-150">
+            <div class="flex justify-between items-center border-b border-gray-700 pb-3">
+                <h3 class="text-sm font-bold text-purple-400 flex items-center gap-2">
+                    <i class="fa-solid fa-terminal"></i> AI Study Prompt Generator
+                </h3>
+                <button onclick="closeModal()" class="text-gray-400 hover:text-white transition"><i class="fa-solid fa-xmark text-lg"></i></button>
+            </div>
+            <div class="space-y-1">
+                <p id="modal-task-title" class="text-xs text-gray-400 font-semibold"></p>
+                <p class="text-xs text-gray-500 font-medium">Copy đoạn prompt dưới đây ném cho AI để bắt đầu bài học hôm nay:</p>
+            </div>
+            <div class="bg-gray-900 border border-gray-700 rounded-lg p-3 relative group">
+                <pre id="modal-prompt-text" class="text-xs text-gray-300 font-mono overflow-x-auto whitespace-pre-wrap max-h-64 pr-4 leading-relaxed"></pre>
+            </div>
+            <div class="flex justify-end gap-2">
+                <button onclick="closeModal()" class="px-4 py-2 rounded-lg bg-gray-700 hover:bg-gray-600 text-xs font-semibold transition">Đóng</button>
+                <button onclick="copyModalPrompt()" class="px-4 py-2 rounded-lg bg-purple-600 hover:bg-purple-700 text-xs font-semibold text-white transition flex items-center gap-1.5 shadow-md">
+                    <i class="fa-regular fa-copy"></i> Sao Chép Prompt
+                </button>
+            </div>
+        </div>
     </div>
 
+    <!-- Toast Notification -->
+    <div id="toast" class="fixed bottom-5 right-5 bg-emerald-600 text-white text-xs font-bold px-4 py-2.5 rounded-lg shadow-lg opacity-0 pointer-events-none transition-opacity duration-300 z-50">
+        <i class="fa-solid fa-check mr-1"></i> Đã sao chép câu lệnh thành công!
+    </div>
+
+    <!-- Data Injection & Logic Architecture -->
     <script>
         const roadmapData = {
             phase1: [
-                { id: 1, title: "Ngày 1: Bộ nhớ Stack vs Heap & Kiểu dữ liệu", desc: "Hiểu bản chất Value Type vs Reference Type. So sánh trực tiếp cách quản lý bộ nhớ của C# với biến Primitive/Object trong JS.", vocab: "Memory Allocation, Stack Memory, Heap Allocation, Value Types, Reference Types" },
-                { id: 2, title: "Ngày 2: Tính Đóng Gói (Encapsulation) & Access Modifiers", desc: "Làm chủ public, private, protected, đặc biệt là 'internal' (chí mạng trong ABP). Học cách viết Property gọn với { get; set; }.", vocab: "Access Modifiers, Encapsulation, Properties, Auto-implemented properties" },
-                { id: 3, title: "Ngày 3: Tính Kế Thừa & Từ khóa base() trong Constructor", desc: "Học cách class con thừa hưởng thuộc tính class cha. Cách dùng từ khóa base() để đẩy tham số lên Constructor của cha.", vocab: "Base Class, Derived Class, Constructor Inheritance, Constructor Chaining" },
-                { id: 4, title: "Ngày 4: Tính Đa Hình - Virtual & Override", desc: "Học cách viết hàm ở class cha cho phép class con sửa đổi logic tường minh thông qua từ khóa virtual và override.", vocab: "Polymorphism, Virtual Methods, Method Overriding, Runtime Polymorphism" },
-                { id: 5, title: "Ngày 5: Interface & Abstract Class (Ranh giới thiết kế)", desc: "Hiểu tại sao C# cực kỳ nghiện Interface. Phân biệt Interface (bản hợp đồng thuần) khác gì Abstract Class dưới góc độ Runtime.", vocab: "Interface Implementation, Abstract Class, Contract-based programming" },
-                { id: 6, title: "Ngày 6 & 7: Cuối Tuần 1 - Thực hành App Console Quản Lý Ngân Hàng", desc: "Tự viết app Console áp dụng đủ 4 tính chất OOP, sử dụng Interface ILogger để in lịch sử giao dịch. Bắt AI review code song ngữ.", vocab: "Console Application, Code Review, Refactoring, Clean Code Principles" },
-                { id: 7, title: "Ngày 8 & 9: Thao túng mảng dữ liệu chuyên sâu với LINQ", desc: "Bắc cầu tư duy: Chuyển đổi các hàm quen thuộc .filter() -> .Where(), .map() -> .Select(), .find() -> .FirstOrDefault(), .some() -> .Any().", vocab: "Language Integrated Query (LINQ), Method Syntax, Lambda Expressions, Predicate" },
-                { id: 8, title: "Ngày 10: LINQ Nâng Cao - Gom nhóm & Biến đổi cấu trúc", desc: "Học cách dùng .GroupBy(), .SelectMany(), và .ToDictionary() để gom nhóm dữ liệu phức tạp trước khi trả về JSON cho Frontend.", vocab: "Grouping Data, Flattening Collections, Immediate Execution vs Deferred Execution" },
-                { id: 9, title: "Ngày 11 & 12: Lập Trình Bất Đồng Bộ (Async/Await) & Luồng", desc: "Thấu hiểu Task, async, await. Tại sao Backend bắt buộc dùng async để chống nghẽn nghẹt luồng Server. Cách dùng CancellationToken.", vocab: "Thread Pool, Task-based Asynchronous Pattern (TAP), CancellationToken, Thread Starvation" },
-                { id: 10, title: "Ngày 13 & 14: Cuối Tuần 2 - Viết Hàm LINQ Bất Đồng Bộ Phân Trang", desc: "Tạo mảng giả lập 1000 phần tử, viết hàm Async LINQ để thực hiện lọc dữ liệu theo Tenant và phân trang (Skip/Take).", vocab: "Pagination Handling, Asynchronous Data Fetching, Skip and Take Methods" },
-                { id: 11, title: "Ngày 15: Bản chất của Dependency Injection (DI) & IoC Container", desc: "Hiểu tại sao không được dùng từ khóa 'new' tùy tiện. Để Server quản lý vòng đời và tự động 'bơm' các dependency qua Constructor.", vocab: "Inversion of Control (IoC), Dependency Injection, Loose Coupling, Dependency Graph" },
-                { id: 12, title: "Ngày 16: Vòng đời Service Chí Mạng - Transient, Scoped, Singleton", desc: "Phân biệt rõ 3 vòng đời. Hiểu sâu tại sao Scoped service sinh ra là dành riêng cho từng HTTP Request (Đặc biệt quan trọng với Tenant).", vocab: "Transient Lifetime, Scoped Lifetime, Singleton Lifetime, Service Registration" },
-                { id: 13, title: "Ngày 17: Cấu hình hệ thống qua appsettings.json", desc: "Cách lưu trữ cấu hình, chuỗi bảo mật an toàn. Dùng IConfiguration để đọc data động dựa theo môi trường (Development/Production).", vocab: "Configuration Provider, Environment Variables, Connection Strings, App Settings" },
-                { id: 14, title: "Ngày 18 & 19: Middleware & HTTP Request Pipeline", desc: "Hiểu luồng đi của request từ FE vào BE. Cách request đi qua các trạm kiểm soát (Tenant Check, Auth Token, Logging) trước khi chạm API.", vocab: "Middleware Pipeline, HTTP Request Lifecycle, Next Delegate, HttpContext" },
-                { id: 15, title: "Ngày 20 & 21: Cuối Tuần 3 - Đột Kích Source Code Công Ty", desc: "Mở mã nguồn Backend của công ty bạn ra. Tìm file Module hoặc Program.cs để xem cách họ đăng ký service và inject interface.", vocab: "Enterprise Codebase, Reverse Engineering, Dependency Inspection" }
+                { id: 1, title: "Ngày 1: Bộ nhớ Stack vs Heap & Kiểu dữ liệu", desc: "Hiểu bản chất Value Type vs Reference Type. So sánh trực tiếp cách quản lý bộ nhớ của C# với biến Primitive/Object trong JS.", vocab: "Memory Allocation, Stack Memory, Heap Allocation, Value Types, Reference Types",
+                  prompt: "Tôi là lập trình viên Frontend có 2 năm kinh nghiệm với React/TypeScript, hiện tại đang bắt đầu học Backend .NET Core và C#. Hôm nay tôi muốn học về cơ chế quản lý bộ nhớ: 'Stack Memory vs Heap Allocation' và cách phân chia 'Value Types vs Reference Types' trong C#. Hãy giải thích cho tôi theo quy tắc: Viết một đoạn ngắn gọn bằng tiếng Anh kỹ thuật đơn giản (Technical English), sau đó dịch lại chính xác bằng tiếng Việt ngay bên dưới dưới dạng Blockquote. Hãy bôi đậm các thuật ngữ chuyên ngành quan trình và so sánh trực tiếp với cách JavaScript quản lý biến Primitive và Object để tôi dễ hình dung." },
+                { id: 2, title: "Ngày 2: Tính Đóng Gói (Encapsulation) & Access Modifiers", desc: "Làm chủ public, private, protected, đặc biệt là 'internal' (chí mạng trong ABP). Học cách viết Property gọn với { get; set; }.", vocab: "Access Modifiers, Encapsulation, Properties, Auto-implemented properties",
+                  prompt: "Tôi là lập trình viên FE đang chuyển giao sang BE .NET. Hãy dạy cho tôi về 'Tính đóng gói (Encapsulation)' và các từ khóa điều khiển truy cập 'Access Modifiers' (public, private, protected, internal) cùng cách viết 'Properties { get; set; }' trong C#. Hãy viết bằng tiếng Anh kỹ thuật đơn giản kèm dịch nghĩa tiếng Việt dạng blockquote ngay bên dưới. Giải thích rõ từ khóa 'internal' hoạt động như thế nào trong một Enterprise Project và so sánh nó với Access Modifiers của TypeScript." },
+                { id: 3, title: "Ngày 3: Tính Kế Thừa & Từ khóa base() trong Constructor", desc: "Học cách class con thừa hưởng thuộc tính class cha. Cách dùng từ khóa base() để đẩy tham số lên Constructor của cha.", vocab: "Base Class, Derived Class, Constructor Inheritance, Constructor Chaining",
+                  prompt: "Hãy dùng quy tắc song ngữ (đoạn tiếng Anh kỹ thuật đơn giản trước, dịch tiếng Việt blockquote sau) giải thích cho tôi về 'Tính kế thừa (Inheritance)' trong C#. Tập trung giải thích sâu cách viết 'Constructor Chaining' và cách dùng từ khóa 'base()' để truyền tham số từ Class con (Derived Class) lên Class cha (Base Class). Cho ví dụ thực tế liên quan đến lập trình Backend." },
+                { id: 4, title: "Ngày 4: Tính Đa Hình - Virtual & Override", desc: "Học cách viết hàm ở class cha cho phép class con sửa đổi logic tường minh thông qua từ khóa virtual và override.", vocab: "Polymorphism, Virtual Methods, Method Overriding, Runtime Polymorphism",
+                  prompt: "Hãy dùng quy tắc song ngữ (English technical đơn giản trước, dịch tiếng Việt blockquote sau) giải thích cho tôi về 'Tính đa hình (Polymorphism)'. Phân biệt rõ từ khóa 'virtual' và 'override' trong C#. Tại sao C# lại bắt buộc khai báo tường minh khi ghi đè phương thức, khác gì so với tính kế thừa tự do của JavaScript/TypeScript?" },
+                { id: 5, title: "Ngày 5: Interface & Abstract Class (Ranh giới thiết kế)", desc: "Hiểu tại sao C# cực kỳ nghiện Interface. Phân biệt Interface (bản hợp đồng thuần) khác gì Abstract Class dưới góc độ Runtime.", vocab: "Interface Implementation, Abstract Class, Contract-based programming",
+                  prompt: "Tôi đang học C# nâng cao. Hãy dùng quy tắc học song ngữ giải thích cho tôi sự khác biệt cốt lõi giữa 'Interface' và 'Abstract Class' ở tầng Runtime của C#. Tại sao trong kiến trúc Backend người ta lại cuồng Interface để làm Contract-based programming? Hãy so sánh Interface của C# với Interface của TypeScript (giải thích việc Interface TS biến mất khi compile)." },
+                { id: 6, title: "Ngày 6 & 7: Cuối Tuần 1 - Luyện Tập Viết Ứng Dụng Console", desc: "Tự viết app Console áp dụng đủ 4 tính chất OOP, sử dụng Interface ILogger để in lịch sử giao dịch. Bắt AI review code song ngữ.", vocab: "Console Application, Code Review, Refactoring, Clean Code Principles",
+                  prompt: "Tôi đã học xong OOP cơ bản của C#. Tôi muốn làm một bài tập tổng hợp: Thiết kế hệ thống quản lý tài khoản ngân hàng dạng ứng dụng Console áp dụng tính đóng gói, kế thừa, đa hình và Interface (ví dụ tạo interface ILogger). Xin hãy ra cho tôi một đề bài chi tiết (chỉ đưa đề bài bằng tiếng Anh chuyên ngành kèm bản dịch, không đưa code mẫu). Sau khi tôi gửi code của tôi, bạn sẽ đóng vai trò Senior Code Reviewer để sửa lỗi và tối ưu cho tôi." },
+                { id: 7, title: "Ngày 8 & 9: Thao túng mảng dữ liệu chuyên sâu với LINQ", desc: "Bắc cầu tư duy: Chuyển đổi các hàm quen thuộc .filter() -> .Where(), .map() -> .Select(), .find() -> .FirstOrDefault(), .some() -> .Any().", vocab: "Language Integrated Query (LINQ), Method Syntax, Lambda Expressions, Predicate",
+                  prompt: "Tôi là dev React chuyển sang học .NET. Tôi muốn học về 'LINQ (Language Integrated Query)' dạng Method Syntax thông qua Lambda Expressions. Hãy dùng quy tắc song ngữ giải thích và bắc cầu tư duy bằng cách map trực tiếp các hàm xử lý mảng của JavaScript sang LINQ C#: map() sang .Select(), filter() sang .Where(), find() sang .FirstOrDefault(), some() sang .Any(). Cho ví dụ code song song cả 2 bên." },
+                { id: 8, title: "Ngày 10: LINQ Nâng Cao - Gom nhóm & Biến đổi cấu trúc", desc: "Học cách dùng .GroupBy(), .SelectMany(), và .ToDictionary() để gom nhóm dữ liệu phức tạp trước khi trả về JSON cho Frontend.", vocab: "Grouping Data, Flattening Collections, Immediate Execution vs Deferred Execution",
+                  prompt: "Hãy dùng quy tắc giải thích song ngữ (Technical English trước, dịch tiếng Việt blockquote dưới) để dạy tôi các hàm LINQ nâng cao: '.GroupBy()', '.SelectMany()' và cách chuyển đổi tập hợp. Giải thích rõ sự khác biệt giữa 'Immediate Execution' (Thực thi ngay lập tức qua .ToList()) và 'Deferred Execution' (Trì hoãn thực thi) trong LINQ ảnh hưởng thế nào đến hiệu năng." },
+                { id: 9, title: "Ngày 11 & 12: Lập Trình Bất Đồng Bộ (Async/Await) & Luồng", desc: "Thấu hiểu Task, async, await. Tại sao Backend bắt buộc dùng async để chống nghẽn nghẹt luồng Server. Cách dùng CancellationToken.", vocab: "Thread Pool, Task-based Asynchronous Pattern (TAP), CancellationToken, Thread Starvation",
+                  prompt: "Hãy dùng quy tắc song ngữ giải thích cho tôi về Lập trình bất đồng bộ 'Task-based Asynchronous Pattern (TAP)' trong .NET. Tại sao phía Server Backend bắt buộc phải viết hàm 'async/await' để giải phóng luồng cho Thread Pool? Phân biệt 'Task' của C# khác gì 'Promise' của JavaScript. Tiện thể giải thích tác dụng của 'CancellationToken' dùng để hủy request khi người dùng hủy bỏ thao tác ở Frontend." },
+                { id: 10, title: "Ngày 13 & 14: Cuối Tuần 2 - Thực Hành Viết Hàm Phân Trang Async LINQ", desc: "Tạo mảng giả lập 1000 phần tử, viết hàm Async LINQ để thực hiện lọc dữ liệu theo Tenant và phân trang (Skip/Take).", vocab: "Pagination Handling, Asynchronous Data Fetching, Skip and Take Methods",
+                  prompt: "Tôi muốn thực hành viết một hàm xử lý dữ liệu bất đồng bộ. Hãy cho tôi một đề bài (bằng tiếng Anh kỹ thuật kèm dịch tiếng Việt) yêu cầu tạo một danh sách giả lập 1000 bản ghi, sau đó viết hàm Async dùng LINQ kết hợp các hàm '.Skip()' và '.Take()' để làm tính năng tìm kiếm, lọc theo điều kiện và phân trang dữ liệu giống như khi viết API." },
+                { id: 11, title: "Ngày 15: Bản chất của Dependency Injection (DI) & IoC Container", desc: "Hiểu tại sao không được dùng từ khóa 'new' tùy tiện. Để Server quản lý vòng đời và tự động 'bơm' các dependency qua Constructor.", vocab: "Inversion of Control (IoC), Dependency Injection, Loose Coupling, Dependency Graph",
+                  prompt: "Hãy áp dụng quy tắc song ngữ dạy cho tôi về nguyên lý 'Inversion of Control (IoC)' và mô hình 'Dependency Injection (DI)'. Tại sao khi viết mã nguồn Backend chất lượng cao cho doanh nghiệp, lập trình viên không được lạm dụng từ khóa 'new' để tạo object mà phải inject qua Constructor để đạt được trạng thái 'Loose Coupling'?" },
+                { id: 12, title: "Ngày 16: Vòng đời Service Chí Mạng - Transient, Scoped, Singleton", desc: "Phân biệt rõ 3 vòng đời. Hiểu sâu tại sao Scoped service sinh ra là dành riêng cho từng HTTP Request (Đặc biệt quan trọng với Tenant).", vocab: "Transient Lifetime, Scoped Lifetime, Singleton Lifetime, Service Registration",
+                  prompt: "Hãy dùng quy tắc giảng dạy song ngữ giải thích cực kỳ chi tiết cho tôi về 3 vòng đời đăng ký dịch vụ (Service Lifetimes) trong .NET Core: 'Transient', 'Scoped' và 'Singleton'. Hãy vẽ sơ đồ hoặc lấy ví dụ luồng chạy để làm rõ tại sao 'Scoped Lifetime' lại sinh ra hoàn hảo cho một HTTP Request của một Tenant cụ thể." },
+                { id: 13, title: "Ngày 17: Cấu hình hệ thống qua appsettings.json", desc: "Cách lưu trữ cấu hình, chuỗi bảo mật an toàn. Dùng IConfiguration để đọc data động dựa theo môi trường (Development/Production).", vocab: "Configuration Provider, Environment Variables, Connection Strings, App Settings",
+                  prompt: "Hãy hướng dẫn tôi bằng quy tắc song ngữ cách quản lý cấu hình hệ thống bằng file 'appsettings.json' và cách sử dụng interface 'IConfiguration' trong .NET Core. Giải thích cách nạp chuỗi kết nối cơ sở dữ liệu 'Connection Strings' an toàn và cách ghi đè cấu hình bằng 'Environment Variables' khi đưa ứng dụng lên môi trường Production." },
+                { id: 14, title: "Ngày 18 & 19: Middleware & HTTP Request Pipeline", desc: "Hiểu luồng đi của request từ FE vào BE. Cách request đi qua các trạm kiểm soát (Tenant Check, Auth Token, Logging) trước khi chạm API.", vocab: "Middleware Pipeline, HTTP Request Lifecycle, Next Delegate, HttpContext",
+                  prompt: "Hãy giải thích cho tôi theo quy tắc song ngữ về vòng đời của một Request thông qua 'HTTP Request Pipeline' và cơ chế hoạt động của 'Middleware' trong ASP.NET Core. Hãy lấy ví dụ về một chuỗi middleware gồm: Ghi log -> Kiểm tra mã hóa Token -> Nhận diện Tenant Id. Dòng dữ liệu đi qua 'Next Delegate' và tương tác với 'HttpContext' như thế nào?" },
+                { id: 15, title: "Ngày 20 & 21: Cuối Tuần 3 - Đột Kích Source Code Công Ty", desc: "Mở mã nguồn Backend của công ty bạn ra. Tìm file Module hoặc Program.cs để xem cách họ đăng ký service và inject interface.", vocab: "Enterprise Codebase, Reverse Engineering, Dependency Inspection",
+                  prompt: "Hôm nay tôi sẽ đọc trực tiếp mã nguồn dự án thật tại công ty tôi (chạy .NET Core / ABP Framework). Xin hãy hướng dẫn tôi bằng tiếng Anh chuyên ngành kèm dịch tiếng Việt các bước khoa học để 'Reverse Engineering' (Đọc ngược mã nguồn), cách tìm file Program.cs, file Module cấu hình để kiểm tra cách họ đăng ký Dependency Injection và tổ chức các Middleware." }
             ],
             phase2: [
-                { id: 16, title: "Ngày 22 & 23: Tư duy thiết kế Database SaaS (Multi-tenant)", desc: "Học cách thiết kế thực thể, phân tách Primary Key, Foreign Key. Tại sao kiến trúc dùng chung DB bắt buộc mọi bảng phải có cột TenantId.", vocab: "Relational Database, Primary Key Constraints, Foreign Key, Data Integrity, Tenant Isolation" },
-                { id: 17, title: "Ngày 24 & 25: Truy vấn SQL nâng cao & Liên kết bảng (Join)", desc: "Viết thành thạo INNER JOIN, LEFT JOIN, GROUP BY phục vụ tổng hợp báo cáo. Hiểu cách EF Core dịch code C# thành các câu lệnh này.", vocab: "Joins, Aggregation Functions, Subqueries, Structured Query Language (SQL)" },
-                { id: 18, title: "Ngày 26 & 27: Cuối tuần 4 - Tối ưu hóa Database với Index", desc: "Học cách tạo Clustered Index và Non-Clustered Index để tăng tốc độ tìm kiếm cho bảng hàng triệu dòng, đọc hiểu Execution Plan.", vocab: "Clustered Index, Non-Clustered Index, Query Execution Plan, Performance Tuning" },
-                { id: 19, title: "Ngày 28 & 29: Khởi tạo Entity & Cấu hình DbContext trong EF Core", desc: "Tạo các Class C# (Entity) ánh xạ thành bảng. Thiết lập file DbContext đóng vai trò cầu nối dữ liệu giữa .NET và DB Server.", vocab: "Entity Framework Core, DbContext, Database Providers, DbSet Properties" },
-                { id: 20, title: "Ngày 30 & 31: Thiết lập mối quan hệ bảng bằng Fluent API", desc: "Sử dụng Fluent API cấu hình chặt chẽ quan hệ 1-Nhiều (1 Cửa hàng - Nhiều Sản phẩm) và Nhiều-Nhiều (Hóa đơn - Sản phẩm).", vocab: "Fluent API Configuration, One-to-Many Relationship, Many-to-Many Relationship, Cascade Delete" },
-                { id: 21, title: "Ngày 32 & 33: Cuối tuần 5 - Thực hành Migrations & Data Seeding", desc: "Chạy Add-Migration và Update-Database sinh cấu trúc bảng thật. Viết hàm tự động chèn dữ liệu menu mẫu khi hệ thống khởi chạy.", vocab: "Code-First Migrations, Data Seeding, Database Rollback, DbMigration History" },
-                { id: 22, title: "Ngày 34 & 35: Tiêu diệt triệt để lỗi N+1 Query chí mạng", desc: "Hiểu rõ tại sao API chạy chậm do lỗi lặp truy vấn. Học cách áp dụng Eager Loading (.Include()) để gom lệnh gọi DB làm một.", vocab: "N+1 Query Problem, Eager Loading, Lazy Loading, Explicit Loading" },
-                { id: 23, title: "Ngày 36 & 37: Tối ưu hóa API chỉ đọc với AsNoTracking", desc: "Khi viết API lấy danh sách hiển thị, áp dụng hàm .AsNoTracking() để giảm tải bộ nhớ cho Change Tracker, tăng gấp đôi tốc độ API.", vocab: "AsNoTracking, Change Tracker, Read-Only Optimization, Memory Footprint" },
-                { id: 24, title: "Ngày 38, 39 & 40: Cuối tuần 6 - Đóng gói Service CRUD thuần EF Core", desc: "Tự tay viết một service ProductService hoàn chỉnh có đủ các hàm CRUD kết hợp phân trang sử dụng LINQ Async và EF Core thuần.", vocab: "Data Access Layer (DAL), Business Logic Layer, Asynchronous CRUD, Repository Pattern" }
+                { id: 16, title: "Ngày 22 & 23: Tư duy thiết kế Database SaaS (Multi-tenant)", desc: "Học cách thiết kế thực thể, phân tách Primary Key, Foreign Key. Tại sao kiến trúc dùng chung DB bắt buộc mọi bảng phải có cột TenantId.", vocab: "Relational Database, Primary Key Constraints, Foreign Key, Data Integrity, Tenant Isolation",
+                  prompt: "Hãy giải thích bằng quy tắc học song ngữ về tư duy thiết kế Cơ sở dữ liệu quan hệ (Relational Database) áp dụng cho hệ thống SaaS Multi-tenancy. Phân tích rõ vai trò của 'Primary Key', 'Foreign Key' để bảo vệ 'Data Integrity'. Đặc biệt giải thích kiến trúc dùng chung cơ sở dữ liệu (Shared Database) bắt buộc phải tích hợp cột 'TenantId' vào mọi bảng để thực hiện 'Tenant Isolation' như thế nào." },
+                { id: 17, title: "Ngày 24 & 25: Truy vấn SQL nâng cao & Liên kết bảng (Join)", desc: "Viết thành thạo INNER JOIN, LEFT JOIN, GROUP BY phục vụ tổng hợp báo cáo. Hiểu cách EF Core dịch code C# thành các câu lệnh này.", vocab: "Joins, Aggregation Functions, Subqueries, Structured Query Language (SQL)",
+                  prompt: "Hãy dùng quy tắc song ngữ dạy cho tôi cách viết các câu lệnh truy vấn SQL nâng cao gồm: 'INNER JOIN', 'LEFT JOIN', phối hợp với các hàm gom nhóm 'GROUP BY' và 'Subqueries' (Truy vấn con) để trích xuất báo cáo doanh thu. Hãy giải thích mối liên hệ giữa các câu lệnh SQL này với các hàm LINQ trong C#." },
+                { id: 18, title: "Ngày 26 & 27: Cuối tuần 4 - Tối ưu hóa Database với Index", desc: "Học cách tạo Clustered Index và Non-Clustered Index để tăng tốc độ tìm kiếm cho bảng hàng triệu dòng, đọc hiểu Execution Plan.", vocab: "Clustered Index, Non-Clustered Index, Query Execution Plan, Performance Tuning",
+                  prompt: "Hãy giải thích theo phương pháp song ngữ về kỹ thuật tối ưu hóa cơ sở dữ liệu 'Performance Tuning' bằng Index. Phân biệt rõ ràng bản chất cơ học của 'Clustered Index' (Chỉ mục cụm) và 'Non-Clustered Index' (Chỉ mục không cụm). Làm thế nào để phân tích một 'Query Execution Plan' để biết câu lệnh SQL đang bị chậm ở đâu?" },
+                { id: 19, title: "Ngày 28 & 29: Khởi tạo Entity & Cấu hình DbContext trong EF Core", desc: "Tạo các Class C# (Entity) ánh xạ thành bảng. Thiết lập file DbContext đóng vai trò cầu nối dữ liệu giữa .NET và DB Server.", vocab: "Entity Framework Core, DbContext, Database Providers, DbSet Properties",
+                  prompt: "Hãy áp dụng quy tắc giảng dạy song ngữ giới thiệu cho tôi về 'Entity Framework Core' (EF Core). Hướng dẫn cách viết một class Entity chuẩn, cách thiết lập một lớp 'DbContext' kế thừa, và cách khai báo các 'DbSet Properties' để map trực tiếp mã nguồn C# thành các bảng dữ liệu." },
+                { id: 20, title: "Ngày 30 & 31: Thiết lập mối quan hệ bảng bằng Fluent API", desc: "Sử dụng Fluent API cấu hình chặt chẽ quan hệ 1-Nhiều (1 Cửa hàng - Nhiều Sản phẩm) và Nhiều-Nhiều (Hóa đơn - Sản phẩm).", vocab: "Fluent API Configuration, One-to-Many Relationship, Many-to-Many Relationship, Cascade Delete",
+                  prompt: "Hãy dùng quy tắc song ngữ hướng dẫn tôi cách sử dụng 'Fluent API Configuration' trong EF Core để thiết lập mối quan hệ giữa các bảng. Viết code ví dụ tường minh cho mối quan hệ 'One-to-Many' (Một cửa hàng có nhiều sản phẩm) và 'Many-to-Many' (Một hóa đơn gồm nhiều sản phẩm, một sản phẩm thuộc nhiều hóa đơn), cấu hình ràng buộc 'Cascade Delete'." },
+                { id: 21, title: "Ngày 32 & 33: Cuối tuần 5 - Thực hành Migrations & Data Seeding", desc: "Chạy Add-Migration và Update-Database sinh cấu trúc bảng thật. Viết hàm tự động chèn dữ liệu menu mẫu khi hệ thống khởi chạy.", vocab: "Code-First Migrations, Data Seeding, Database Rollback, DbMigration History",
+                  prompt: "Tôi muốn thực hành kỹ thuật Code-First trong EF Core. Hãy giải thích theo quy tắc song ngữ bản chất của 'Code-First Migrations'. Hướng dẫn cách sử dụng lệnh 'Add-Migration', 'Update-Database' và cách viết mã nguồn tự động chèn dữ liệu mồi 'Data Seeding' (ví dụ: tự sinh danh mục món ăn mặc định khi tạo hệ thống) vào cơ sở dữ liệu." },
+                { id: 22, title: "Ngày 34 & 35: Tiêu diệt triệt để lỗi N+1 Query chí mạng", desc: "Hiểu rõ tại sao API chạy chậm do lỗi lặp truy vấn. Học cách áp dụng Eager Loading (.Include()) để gom lệnh gọi DB làm một.", vocab: "N+1 Query Problem, Eager Loading, Lazy Loading, Explicit Loading",
+                  prompt: "Hãy dùng quy tắc giảng dạy song ngữ bóc tách cho tôi một trong những lỗi gây chậm hệ thống Backend kinh điển nhất: 'N+1 Query Problem'. Cho tôi xem ví dụ code lỗi khiến server thực thi hàng trăm câu lệnh SQL không cần thiết và cách xử lý triệt để nó bằng cơ chế 'Eager Loading' thông qua hàm '.Include()' trong EF Core." },
+                { id: 23, title: "Ngày 36 & 37: Tối ưu hóa API chỉ đọc với AsNoTracking", desc: "Khi viết API lấy danh sách hiển thị, áp dụng hàm .AsNoTracking() để giảm tải bộ nhớ cho Change Tracker, tăng gấp đôi tốc độ API.", vocab: "AsNoTracking, Change Tracker, Read-Only Optimization, Memory Footprint",
+                  prompt: "Hãy áp dụng cơ chế giải thích song ngữ làm rõ tính năng tối ưu hóa bộ nhớ 'Read-Only Optimization' thông qua hàm '.AsNoTracking()' trong EF Core. Cơ chế 'Change Tracker' ngầm định của EF Core hoạt động thế nào, và tại sao khi viết các API chỉ đọc dữ liệu lên Frontend thì bắt buộc phải ngắt tracking để tiết kiệm 'Memory Footprint'?" },
+                { id: 24, title: "Ngày 38, 39 & 40: Cuối tuần 6 - Đóng gói Service CRUD thuần EF Core", desc: "Tự tay viết một service ProductService hoàn chỉnh có đủ các hàm CRUD kết hợp phân trang sử dụng LINQ Async và EF Core thuần.", vocab: "Data Access Layer (DAL), Business Logic Layer, Asynchronous CRUD, Repository Pattern",
+                  prompt: "Tôi muốn làm bài tập lớn kết thúc chặng DB. Hãy đưa ra đề bài (theo cấu trúc song ngữ) yêu cầu tôi tự thiết kế một 'Business Logic Layer' chứa dịch vụ ProductService thực hiện toàn bộ thao tác 'Asynchronous CRUD' (Thêm, sửa, xóa, tìm kiếm phân trang nâng cao) tương tác trực tiếp với EF Core DbContext theo chuẩn Repository Pattern." }
             ],
             phase3: [
-                { id: 25, title: "Ngày 41 & 42: Khởi tạo Project & Đọc bản đồ kiến trúc ABP", desc: "Dùng ABP CLI tạo template mới. Tìm hiểu sự phụ thuộc chuẩn DDD giữa các tầng .Domain -> .Application -> .HttpApi -> .EntityFrameworkCore.", vocab: "Domain-Driven Design (DDD), Layered Architecture, Module Dependency, ABP CLI" },
-                { id: 26, title: "Ngày 43 & 44: Tầng Domain - Định nghĩa và Khởi tạo Aggregate Root", desc: "Tạo Entity trong ABP. Phân biệt khi nào kế thừa AggregateRoot (Bảng chính: Hóa đơn, Sản phẩm) và Entity (Bảng phụ: Chi tiết hóa đơn).", vocab: "Aggregate Root, Value Object, Domain Entities, Audit Properties" },
-                { id: 27, title: "Ngày 45, 46 & 47: Cuối tuần 7 - Đột kích tầng Domain của công ty", desc: "Mở code BE của công ty, tìm tầng .Domain, đối chiếu xem các anh lớn cấu hình khóa chính (Guid) và các interface ISoftDelete thế nào.", vocab: "Enterprise Codebase, Reverse Engineering, Soft Delete, AuditedAggregateRoot" },
-                { id: 28, title: "Ngày 48 & 49: Tầng Application - Thiết kế DTO chuẩn đầu ra", desc: "Tuyệt đối không trả Entity về cho FE. Thiết kế các class DTO định nghĩa chính xác cục JSON đầu ra (Tương đương TypeScript Interface).", vocab: "Data Transfer Object (DTO), Request DTO, Response DTO, API Contract" },
-                { id: 29, title: "Ngày 50 & 51: Ánh xạ tự động dữ liệu bằng AutoMapper", desc: "Cấu hình AutoMapper Profile để tự động chuyển đổi dữ liệu từ Entity sang DTO một cách an toàn chỉ trong một dòng lệnh.", vocab: "Object-to-Object Mapping, AutoMapper Profile, Mapping Configuration" },
-                { id: 30, title: "Ngày 52, 53 & 54: Cuối tuần 8 - Viết hàm AppService thủ công đầu tiên", desc: "Viết một ProductAppService hoàn chỉnh lấy dữ liệu từ DB thông qua Repository, map sang DTO bằng AutoMapper và trả về kết quả.", vocab: "Application Service, Repository Injection, Mapping Execution" },
-                { id: 31, title: "Ngày 55 & 56: Giải phóng API tự động với CrudAppService", desc: "Kế thừa class CrudAppService của ABP, chỉ cần truyền vào Entity và DTO, ABP tự động sinh ra 5 đầu API kèm bộ lọc phân trang.", vocab: "CrudAppService, PagedAndSortedResultRequestDto, Dynamic Web API, Swagger Integration" },
-                { id: 32, title: "Ngày 57 & 58: Kiểm thử API với Swagger & Kết nối mã nguồn FE", desc: "Chạy ứng dụng, bật Swagger. Sử dụng Postman hoặc Axios ở dự án FE của bạn gọi thử vào các API tự động để xem luồng dữ liệu.", vocab: "Swagger UI, Endpoint Testing, Cross-Origin Resource Sharing (CORS)" },
-                { id: 33, title: "Ngày 59, 60 & 61: Cuối tuần 9 - Viết đè (Override) Logic mặc định", desc: "Học cách override lại hàm DeleteAsync hoặc CreateAsync mặc định của ABP để chèn thêm business riêng như trừ kho, kiểm tra tồn.", vocab: "Method Overriding, Custom Business Logic, Base Service Customization" },
-                { id: 34, title: "Ngày 62 & 63: Xây dựng hệ thống Phân Quyền chi tiết (Permissions)", desc: "Định nghĩa quyền trong PermissionDefinitionProvider. Bảo vệ API nghiêm ngặt bằng thuộc tính [Authorize('Ten_Quyen')].", vocab: "Role-Based Access Control (RBAC), Permission Tree, Authorization Policy, Claims" },
-                { id: 35, title: "Ngày 64 & 65: Bắt lỗi dữ liệu đầu vào bằng FluentValidation", desc: "Viết class Validator để chặn đứng dữ liệu sai từ Client (Giá không được âm, tên không được trống), tự động trả về lỗi 400.", vocab: "FluentValidation, Model State Validation, Data Annotation, BadRequest Response" },
-                { id: 36, title: "Ngày 66, 67 & 68: Cuối tuần 10 - Tổng hợp Module Quản Lý Danh Mục", desc: "Tự viết từ đầu Module Category hoàn chỉnh: Có phân quyền (Chỉ Admin mới được sửa), tự động sinh API và validate dữ liệu đầu vào.", vocab: "Module Development, Production-Ready Code, Integration Testing" }
+                { id: 25, title: "Ngày 41 & 42: Khởi tạo Project & Đọc bản đồ kiến trúc ABP", desc: "Dùng ABP CLI tạo template mới. Tìm hiểu sự phụ thuộc chuẩn DDD giữa các tầng .Domain -> .Application -> .HttpApi -> .EntityFrameworkCore.", vocab: "Domain-Driven Design (DDD), Layered Architecture, Module Dependency, ABP CLI",
+                  prompt: "Tôi bắt đầu bước vào thế giới ABP Framework. Hãy giải thích cho tôi theo quy tắc song ngữ về triết lý 'Layered Architecture' tuân theo tiêu chuẩn 'Domain-Driven Design (DDD)' của ABP. Giải thích luồng đi của dữ liệu và sự phụ thuộc 'Module Dependency' giữa 4 dự án con cốt lõi: .Domain, .Application, .HttpApi, và .EntityFrameworkCore." },
+                { id: 26, title: "Ngày 43 & 44: Tầng Domain - Định nghĩa và Khởi tạo Aggregate Root", desc: "Tạo Entity trong ABP. Phân biệt khi nào kế thừa AggregateRoot (Bảng chính: Hóa đơn, Sản phẩm) và Entity (Bảng phụ: Chi tiết hóa đơn).", vocab: "Aggregate Root, Value Object, Domain Entities, Audit Properties",
+                  prompt: "Hãy áp dụng quy tắc song ngữ dạy cho tôi về cấu trúc của 'Tầng Domain' trong ABP Framework. Phân biệt rõ khi nào một thực thể cần kế thừa từ 'AggregateRoot' và khi nào chỉ cần kế thừa từ 'Entity'. Giải thích cơ chế tự động theo dõi lịch sử thông qua 'Audit Properties' (như IHasCreationTime, ISoftDelete) của ABP." },
+                { id: 27, title: "Ngày 45, 46 & 47: Cuối tuần 7 - Đột kích tầng Domain của công ty", desc: "Mở code BE của công ty, tìm tầng .Domain, đối chiếu xem các anh lớn cấu hình khóa chính (Guid) và các interface ISoftDelete thế nào.", vocab: "Enterprise Codebase, Reverse Engineering, Soft Delete, AuditedAggregateRoot",
+                  prompt: "Tôi chuẩn bị phân tích code dự án thật chạy ABP của công ty. Hãy cung cấp cho tôi một bộ hướng dẫn (song ngữ) gồm các câu hỏi và tiêu chí kiểm tra để tôi tự soi vào tầng .Domain của dự án công ty: Cách họ cấu hình 'AuditedAggregateRoot', cách triển khai tính năng 'Soft Delete' ẩn dữ liệu mà không xóa thật khỏi DB." },
+                { id: 28, title: "Ngày 48 & 49: Tầng Application - Thiết kế DTO chuẩn đầu ra", desc: "Tuyệt đối không trả Entity về cho FE. Thiết kế các class DTO định nghĩa chính xác cục JSON đầu ra (Tương đương TypeScript Interface).", vocab: "Data Transfer Object (DTO), Request DTO, Response DTO, API Contract",
+                  prompt: "Hãy dùng quy tắc học song ngữ giải thích cho tôi về vai trò của 'Data Transfer Object (DTO)' trong tầng Application của ABP. Tại sao trong lập trình hệ thống lớn, tuyệt đối không được trả nguyên vẹn thực thể cơ sở dữ liệu về cho client, mà phải thông qua DTO để bảo vệ 'API Contract'?" },
+                { id: 30, title: "Ngày 50 & 51: Ánh xạ tự động dữ liệu bằng AutoMapper", desc: "Cấu hình AutoMapper Profile để tự động chuyển đổi dữ liệu từ Entity sang DTO một cách an toàn chỉ trong một dòng lệnh.", vocab: "Object-to-Object Mapping, AutoMapper Profile, Mapping Configuration",
+                  prompt: "Hãy áp dụng quy tắc song ngữ hướng dẫn tôi cách sử dụng thư viện 'AutoMapper' được tích hợp sẵn trong ABP Framework. Làm thế nào để khai báo một 'AutoMapper Profile' nhằm thực hiện 'Object-to-Object Mapping', chuyển đổi nhanh một thực thể phức tạp sang một class DTO gọn nhẹ một cách tự động?" },
+                { id: 31, title: "Ngày 52, 53 & 54: Cuối tuần 8 - Viết hàm AppService thủ công đầu tiên", desc: "Viết một ProductAppService hoàn chỉnh lấy dữ liệu từ DB thông qua Repository, map sang DTO bằng AutoMapper và trả về kết quả.", vocab: "Application Service, Repository Injection, Mapping Execution",
+                  prompt: "Tôi muốn thực hành viết mã nguồn thủ công cho một 'Application Service'. Hãy ra cho tôi một bài tập cụ thể (song ngữ) hướng dẫn viết một AppService, thực hiện tiêm kho lưu trữ dữ liệu 'Repository Injection', truy vấn thực thể và kích hoạt AutoMapper để xuất dữ liệu đầu ra." },
+                { id: 32, title: "Ngày 55 & 56: Giải phóng API tự động với CrudAppService", desc: "Kế thừa class CrudAppService của ABP, chỉ cần truyền vào Entity và DTO, ABP tự động sinh ra 5 đầu API kèm bộ lọc phân trang.", vocab: "CrudAppService, PagedAndSortedResultRequestDto, Dynamic Web API, Swagger Integration",
+                  prompt: "Hãy dùng quy tắc giải thích song ngữ bóc tách cho tôi tính năng cực mạnh của ABP: 'Dynamic Web API' thông qua việc kế thừa lớp 'CrudAppService'. Làm thế nào mà chỉ cần khai báo một class kế thừa, hệ thống tự động sinh ra toàn bộ các endpoint API chuẩn RESTful kèm khả năng nhận diện tham số phân trang 'PagedAndSortedResultRequestDto'?" },
+                { id: 33, title: "Ngày 57 & 58: Kiểm thử API với Swagger & Kết nối mã nguồn FE", desc: "Chạy ứng dụng, bật Swagger. Sử dụng Postman hoặc Axios ở dự án FE của bạn gọi thử vào các API tự động để xem luồng dữ liệu.", vocab: "Swagger UI, Endpoint Testing, Cross-Origin Resource Sharing (CORS)",
+                  prompt: "Hãy hướng dẫn tôi bằng quy tắc song ngữ cách sử dụng 'Swagger UI' để kiểm thử các Endpoint API tự động của ABP. Giải thích cách cấu hình 'Cross-Origin Resource Sharing (CORS)' phía Backend .NET để cho phép ứng dụng Front-end (React/Angular) của tôi gọi trực tiếp vào API lấy dữ liệu JSON." },
+                { id: 34, title: "Ngày 59, 60 & 61: Cuối tuần 9 - Viết đè (Override) Logic mặc định", desc: "Học cách override lại hàm DeleteAsync hoặc CreateAsync mặc định của ABP để chèn thêm business riêng như trừ kho, kiểm tra tồn.", vocab: "Method Overriding, Custom Business Logic, Base Service Customization",
+                  prompt: "Tôi muốn làm chủ việc tùy biến ABP. Hãy hướng dẫn bằng quy tắc song ngữ cách thực hiện 'Method Overriding' (Ghi đè phương thức) trong CrudAppService. Viết code mẫu minh họa cách ghi đè lại hàm mặc định 'CreateAsync' để chèn thêm logic kiểm tra hàng tồn kho trước khi lưu xuống Database." },
+                { id: 35, title: "Ngày 62 & 63: Xây dựng hệ thống Phân Quyền chi tiết (Permissions)", desc: "Định nghĩa quyền trong PermissionDefinitionProvider. Bảo vệ API nghiêm ngặt bằng thuộc tính [Authorize('Ten_Quyen')].", vocab: "Role-Based Access Control (RBAC), Permission Definition, Authorization Policy, Claims",
+                  prompt: "Hãy áp dụng quy tắc học song ngữ hướng dẫn tôi cách xây dựng hệ thống phân quyền 'Role-Based Access Control (RBAC)' trong ABP Framework. Cách định nghĩa cây phân quyền trong lớp 'PermissionDefinitionProvider' và cách sử dụng thuộc tính '[Authorize]' để chặn đứng các request lậu truy cập trái phép vào API." },
+                { id: 36, title: "Ngày 64 & 65: Bắt lỗi dữ liệu đầu vào bằng FluentValidation", desc: "Viết class Validator để chặn đứng dữ liệu sai từ Client (Giá không được âm, tên không được trống), tự động trả về lỗi 400.", vocab: "FluentValidation, Model State Validation, Data Annotation, BadRequest Response",
+                  prompt: "Hãy dùng quy tắc song ngữ giảng dạy cách kiểm soát tính hợp lệ của dữ liệu 'Model State Validation' bằng thư viện 'FluentValidation' tích hợp trong ABP. Làm sao để viết một class kiểm tra dữ liệu đầu vào (ví dụ: giá không được nhỏ hơn 0, email phải đúng định dạng) và tự động trả lỗi 'BadRequest' về Frontend?" },
+                { id: 37, title: "Ngày 66, 67 & 68: Cuối tuần 10 - Tổng hợp Module Quản Lý Danh Mục", desc: "Tự viết từ đầu Module Category hoàn chỉnh: Có phân quyền (Chỉ Admin mới được sửa), tự động sinh API và validate dữ liệu đầu vào.", vocab: "Module Development, Production-Ready Code, Integration Testing",
+                  prompt: "Tôi muốn làm bài tập tổng hợp kết thúc chặng ABP Framework. Hãy đưa ra một đề tài lập trình (song ngữ) yêu cầu tôi tự đóng gói một Module hoàn chỉnh theo chuẩn Enterprise: Có bắt lỗi bằng FluentValidation, áp dụng phân quyền nghiêm ngặt và tự động sinh API." }
             ],
             phase4: [
-                { id: 37, title: "Ngày 69 & 70: Giải mã cơ chế Tenant Resolution (Nhận diện khách hàng)", desc: "Học cách ABP bóc tách Tenant Id từ URL Subdomain (tenant1.saas.com) hoặc từ Custom HTTP Header (__tenant) do FE gửi lên.", vocab: "Tenant Resolver, Multi-Tenancy Context, CurrentTenant Singletons, Request Parsing" },
-                { id: 38, title: "Ngày 71 & 72: Kích hoạt IMultiTenant & Global Query Filter tự động", desc: "Kế thừa interface IMultiTenant cho Entity. Xem cách ABP tự động chèn thêm điều kiện 'WHERE TenantId = ...' xuống SQL tầng ngầm.", vocab: "IMultiTenant Interface, Global Query Filter, Data Isolation, Multi-Tenant Database" },
-                { id: 39, title: "Ngày 73, 74 & 75: Cuối tuần 11 - Vượt bộ lọc với Ignore Filters", desc: "Viết API thống kê cho Tổng Công Ty (Host) xem doanh thu toàn bộ hệ thống bằng cách dùng lệnh tắt bộ lọc của ABP.", vocab: "Switching Tenant Context, Disable Global Filters, Host Context Execution" },
-                { id: 40, title: "Ngày 76 & 77: Cấu hình Đa Cơ Sở Dữ Liệu (Separate Database) cho Tenant VIP", desc: "Thiết lập cho Tenant VIP chạy một Database biệt lập nằm ở Server khác thông qua việc cấu hình chuỗi Connection String động.", vocab: "Isolated Databases, Dynamic Connection String, SaaS Deployment Strategies, Connection Multiplexer" },
-                { id: 41, title: "Ngày 78 & 79: Quản lý Tính Năng theo gói cước (Feature Management)", desc: "Tạo các Feature (Ví dụ: Tính năng 'Báo cáo nâng cao'). Dùng [RequiresFeature] khóa API nếu Tenant chỉ mua gói Basic.", vocab: "Feature Management, Feature Value Provider, Premium Features Validation" },
-                { id: 42, title: "Ngày 80, 81 & 82: Cuối tuần 12 - Thử nghiệm toàn diện Hệ thống Đa Tenant", desc: "Tạo 2 Tenant test (1 chung DB, 1 riêng DB). Đăng nhập chéo dữ liệu để đảm bảo tính bảo mật cô lập tuyệt đối 100% giữa các công ty.", vocab: "SaaS Testing, Multi-tenant Isolation Test, Cross-tenant Data Leak Validation" }
+                { id: 38, title: "Ngày 69 & 70: Giải mã cơ chế Tenant Resolution (Nhận diện khách hàng)", desc: "Học cách ABP bóc tách Tenant Id từ URL Subdomain (tenant1.saas.com) hoặc từ Custom HTTP Header (__tenant) do FE gửi lên.", vocab: "Tenant Resolver, Multi-Tenancy Context, CurrentTenant Singletons, Request Parsing",
+                  prompt: "Tôi bước vào chặng cốt lõi nhất: Multi-Tenancy trong ABP Framework. Hãy giải thích theo quy tắc giảng dạy song ngữ cách hệ thống Backend bóc tách request để định danh khách hàng thông qua 'Tenant Resolver'. Luồng hoạt động ngầm quét qua URL Subdomain hoặc Custom HTTP Header '__tenant' để nạp vào 'CurrentTenant' context như thế nào?" },
+                { id: 39, title: "Ngày 71 & 72: Kích hoạt IMultiTenant & Global Query Filter tự động", desc: "Kế thừa interface IMultiTenant cho Entity. Xem cách ABP tự động chèn thêm điều kiện 'WHERE TenantId = ...' xuống SQL tầng ngầm.", vocab: "IMultiTenant Interface, Global Query Filter, Data Isolation, Multi-Tenant Database",
+                  prompt: "Hãy áp dụng quy tắc song ngữ giải thích cho tôi cơ chế tự động cô lập dữ liệu 'Data Isolation' của ABP. Khi một thực thể kế thừa 'IMultiTenant Interface', làm thế nào bộ lọc 'Global Query Filter' của Entity Framework Core tự động chèn mệnh đề 'WHERE TenantId = ...' vào tất cả câu lệnh SQL mà lập trình viên không cần viết tay?" },
+                { id: 40, title: "Ngày 73, 74 & 75: Cuối tuần 11 - Vượt bộ lọc với Ignore Filters", desc: "Viết API thống kê cho Tổng Công Ty (Host) xem doanh thu toàn bộ hệ thống bằng cách dùng lệnh tắt bộ lọc của ABP.", vocab: "Switching Tenant Context, Disable Global Filters, Host Context Execution",
+                  prompt: "Tôi muốn học cách chuyển đổi ngữ cảnh dữ liệu trong hệ thống SaaS. Hãy hướng dẫn bằng quy tắc song ngữ cách sử dụng khối lệnh 'using (_currentTenant.Change(null))' để tạm thời 'Disable Global Filters' (Vô hiệu hóa bộ lọc tự động), cho phép tài khoản Tổng công ty (Host Context) truy vấn xuyên suốt dữ liệu của mọi Tenant để làm báo cáo tổng." },
+                { id: 41, title: "Ngày 76 & 77: Cấu hình Đa Cơ Sở Dữ Liệu (Separate Database) cho Tenant VIP", desc: "Thiết lập cho Tenant VIP chạy một Database biệt lập nằm ở Server khác thông qua việc cấu hình chuỗi Connection String động.", vocab: "Isolated Databases, Dynamic Connection String, SaaS Deployment Strategies, Connection Multiplexer",
+                  prompt: "Hãy dùng quy tắc giải thích song ngữ dạy tôi chiến lược lưu trữ nâng cao của SaaS: 'Database per Tenant' (Mỗi tenant một DB biệt lập). Làm thế nào ABP Framework có thể tiêm chuỗi cấu hình động 'Dynamic Connection String' vào lúc ứng dụng đang chạy để tự động chuyển hướng kết nối cơ sở dữ liệu sang một Server vật lý khác khi có request từ khách hàng VIP?" },
+                { id: 42, title: "Ngày 78 & 79: Quản lý Tính Năng theo gói cước (Feature Management)", desc: "Tạo các Feature (Ví dụ: Tính năng 'Báo cáo nâng cao'). Dùng [RequiresFeature] khóa API nếu Tenant chỉ mua gói Basic.", vocab: "Feature Management, Feature Value Provider, Premium Features Validation",
+                  prompt: "Hãy áp dụng phương thức giảng dạy song ngữ giải thích cho tôi hệ thống quản lý tính năng thương mại 'Feature Management' trong ABP. Cách định nghĩa một Feature và cách sử dụng thuộc tính kiểm tra nghiêm ngặt '[RequiresFeature]' để chặn hoặc mở một API tương ứng với gói cước dịch vụ mà Tenant đã mua." },
+                { id: 43, title: "Ngày 80, 81 & 82: Cuối tuần 12 - Thử nghiệm toàn diện Hệ thống Đa Tenant", desc: "Tạo 2 Tenant test (1 chung DB, 1 riêng DB). Đăng nhập chéo dữ liệu để đảm bảo tính bảo mật cô lập tuyệt đối 100% giữa các công ty.", vocab: "SaaS Testing, Multi-tenant Isolation Test, Cross-tenant Data Leak Validation",
+                  prompt: "Tôi muốn thực hiện bài tập kiểm thử bảo mật kiến trúc Multi-tenancy. Hãy thiết kế cho tôi một kịch bản kiểm thử 'Multi-tenant Isolation Test' (bằng song ngữ) hướng dẫn cách tạo lập 2 Tenant giả lập để kiểm tra xem có xảy ra lỗi rò rỉ dữ liệu chéo 'Cross-tenant Data Leak' hay không và cách đọc nhật ký logs hệ thống để xác thực." }
             ]
         };
 
-        const prompts = {
-            setup: "Tôi đang học .NET và ABP Framework. Tiếng Anh của tôi chưa tốt. Từ bây giờ, khi tôi hỏi bất kỳ khái niệm nào, hãy giải thích cho tôi theo quy tắc: Viết 1 đoạn ngắn bằng tiếng Anh kỹ thuật đơn giản (Technical English), sau đó dịch lại chính xác bằng tiếng Việt ngay bên dưới dưới dạng Blockquote. Hãy bôi đậm các thuật ngữ chuyên ngành quan trọng để tôi học từ vựng.",
-            error: "Code của tôi bị lỗi này: [DÂN LOG LỖI TIẾNG ANH VÀO ĐÂY]. Hãy giải thích cho tôi bằng TIẾNG ANH ĐƠN GIẢN trước về nguyên nhân gây lỗi, sau đó hướng dẫn tôi các bước cụ thể để sửa nó bằng TIẾNG VIỆT."
-        };
-
-        // Render Cards dynamically
+        // Render dynamic day cards
         function renderRoadmap() {
             for (const [phase, tasks] of Object.entries(roadmapData)) {
                 const container = document.getElementById(`list-${phase}`);
@@ -197,11 +260,14 @@
                 
                 tasks.forEach(task => {
                     const card = document.createElement('div');
-                    card.className = "day-card bg-gray-800/40 border border-gray-800 rounded-xl p-4 flex gap-4 items-start hover:border-gray-700 hover:bg-gray-800/60 transition shadow-sm";
+                    card.className = "day-card bg-gray-800/40 border border-gray-800 rounded-xl p-4 flex gap-4 items-start hover:border-gray-700 hover:bg-gray-800/60 transition shadow-sm relative";
                     card.innerHTML = `
-                        <input type="checkbox" id="task-${task.id}" class="task-checkbox mt-1 w-4 h-4 rounded text-blue-600 bg-gray-900 border-gray-700 focus:ring-blue-500 focus:ring-offset-gray-900" onchange="updateProgress()">
-                        <div class="space-y-1 w-full">
-                            <label for="task-${task.id}" class="text-sm font-bold text-gray-200 cursor-pointer hover:text-white block transition-colors">${task.title}</label>
+                        <input type="checkbox" id="task-${task.id}" class="task-checkbox mt-1 w-4 h-4 rounded text-blue-600 bg-gray-900 border-gray-700 focus:ring-blue-500 focus:ring-offset-gray-900" onchange="updateProgress(event)">
+                        <div class="space-y-1 w-full cursor-pointer" onclick="openPromptModal(${task.id}, '${phase}')">
+                            <div class="flex justify-between items-start gap-2">
+                                <span class="text-sm font-bold text-gray-200 hover:text-white transition-colors block">${task.title}</span>
+                                <span class="text-[10px] bg-purple-950/60 text-purple-300 border border-purple-800/50 px-2 py-0.5 rounded flex items-center gap-1"><i class="fa-solid fa-terminal text-[9px]"></i> Click to Prompt</span>
+                            </div>
                             <p class="text-xs text-gray-400 leading-relaxed">${task.desc}</p>
                             <div class="pt-2 flex flex-wrap gap-1.5 items-center">
                                 <span class="text-[10px] font-bold text-gray-500 uppercase tracking-wider"><i class="fa-solid fa-language text-xs"></i> Vocab:</span>
@@ -215,7 +281,7 @@
             loadProgress();
         }
 
-        // Tab Switcher
+        // Tab Handling
         function switchTab(phaseId) {
             document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
             document.querySelectorAll('.tab-btn').forEach(el => {
@@ -229,8 +295,48 @@
             activeBtn.classList.add('bg-blue-600', 'text-white');
         }
 
-        // Progress Handler via localStorage
-        function updateProgress() {
+        // Modal Prompt Architecture
+        let activePromptText = "";
+
+        function openPromptModal(taskId, phase) {
+            const task = roadmapData[phase].find(t => t.id === taskId);
+            if (!task || !task.prompt) return;
+
+            activePromptText = task.prompt;
+            document.getElementById('modal-task-title').innerText = task.title;
+            document.getElementById('modal-prompt-text').innerText = task.prompt;
+            document.getElementById('prompt-modal').classList.remove('hidden');
+        }
+
+        function closeModal() {
+            document.getElementById('prompt-modal').classList.add('hidden');
+            activePromptText = "";
+        }
+
+        function copyModalPrompt() {
+            if (!activePromptText) return;
+            navigator.clipboard.writeText(activePromptText).then(() => {
+                showToast();
+                closeModal();
+            });
+        }
+
+        function copyGlobalErrorPrompt() {
+            const errorPrompt = "Code của tôi bị lỗi này: [DÁN LOG LỖI TIẾNG ANH VÀO ĐÂY]. Hãy giải thích cho tôi bằng TIẾNG ANH ĐƠN GIẢN trước về nguyên nhân gây lỗi, sau đó hướng dẫn tôi các bước cụ thể để sửa nó bằng TIẾNG VIỆT.";
+            navigator.clipboard.writeText(errorPrompt).then(() => {
+                showToast();
+            });
+        }
+
+        function showToast() {
+            const toast = document.getElementById('toast');
+            toast.classList.remove('opacity-0', 'pointer-events-none');
+            setTimeout(() => toast.classList.add('opacity-0', 'pointer-events-none'), 2500);
+        }
+
+        // LocalStorage & Progress Metrics
+        function updateProgress(event) {
+            if (event) event.stopPropagation(); // Stop checkbox click from opening modal
             const checkboxes = document.querySelectorAll('.task-checkbox, #capstone-project');
             let checkedCount = 0;
             const progressData = {};
@@ -240,7 +346,7 @@
                 if (cb.checked) checkedCount++;
             });
 
-            localStorage.setItem('backend_roadmap_full_progress', JSON.stringify(progressData));
+            localStorage.setItem('backend_roadmap_ultimate_progress', JSON.stringify(progressData));
 
             const percent = checkboxes.length ? Math.round((checkedCount / checkboxes.length) * 100) : 0;
             document.getElementById('progress').style.width = `${percent}%`;
@@ -248,7 +354,7 @@
         }
 
         function loadProgress() {
-            const saved = localStorage.getItem('backend_roadmap_full_progress');
+            const saved = localStorage.getItem('backend_roadmap_ultimate_progress');
             if (!saved) return;
             const progressData = JSON.parse(saved);
 
@@ -259,16 +365,7 @@
             updateProgress();
         }
 
-        // Clipboard Copy Utility
-        function copyPrompt(type) {
-            navigator.clipboard.writeText(prompts[type]).then(() => {
-                const toast = document.getElementById('toast');
-                toast.classList.remove('opacity-0', 'pointer-events-none');
-                setTimeout(() => toast.classList.add('opacity-0', 'pointer-events-none'), 2500);
-            });
-        }
-
-        // Run On Initial Load
+        // Init Application
         window.onload = renderRoadmap;
     </script>
 </body>
