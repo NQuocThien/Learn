@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bài Tập Củng Cố: Stack/Heap & Value/Reference Types</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #007acc;
+            --success: #28a745;
+            --danger: #dc3545;
+            --dark: #2d3748;
+            --light: #f7fafc;
+            --border: #e2e8f0;
+        }
+
+        body {
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            background-color: var(--light);
+            color: var(--dark);
+            line-height: 1.6;
+            margin: 0;
+            padding: 40px 20px;
+        }
+
+        .quiz-container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+        }
+
+        h1 {
+            color: var(--primary);
+            text-align: center;
+            margin-bottom: 10px;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: #718096;
+            margin-bottom: 40px;
+        }
+
+        .question-card {
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 25px;
+            background: #fff;
+            transition: all 0.3s ease;
+        }
+
+        .question-title {
+            font-weight: 600;
+            font-size: 1.1rem;
+            margin-bottom: 15px;
+        }
+
+        .code-block {
+            background: #1a202c;
+            color: #fff;
+            padding: 15px;
+            border-radius: 6px;
+            font-family: 'Fira Code', Consolas, Monaco, monospace;
+            font-size: 0.9rem;
+            overflow-x: auto;
+            margin-bottom: 15px;
+        }
+
+        .options-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .option-item {
+            margin-bottom: 10px;
+        }
+
+        .option-item label {
+            display: flex;
+            align-items: center;
+            padding: 12px 15px;
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        .option-item label:hover {
+            background: #edf2f7;
+        }
+
+        .option-item input[type="radio"] {
+            margin-right: 12px;
+            transform: scale(1.2);
+        }
+
+        button.btn-submit {
+            display: block;
+            width: 100%;
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 15px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            border-radius: 6px;
+            cursor: pointer;
+            margin-top: 30px;
+            transition: background 0.2s;
+        }
+
+        button.btn-submit:hover {
+            background: #005999;
+        }
+
+        /* Thống kê kết quả */
+        .result-box {
+            display: none;
+            padding: 20px;
+            border-radius: 8px;
+            text-align: center;
+            font-size: 1.3rem;
+            font-weight: bold;
+            margin-bottom: 30px;
+        }
+
+        .correct-card { border-left: 5px solid var(--success); background: #f0fff4; }
+        .wrong-card { border-left: 5px solid var(--danger); background: #fff5f5; }
+
+        .explanation {
+            display: none;
+            margin-top: 15px;
+            padding: 12px;
+            background: #ebf8ff;
+            border-radius: 6px;
+            font-size: 0.95rem;
+            color: #2b6cb0;
+            border-left: 4px solid var(--primary);
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 3px 8px;
+            font-size: 0.75rem;
+            font-weight: bold;
+            border-radius: 4px;
+            margin-left: 10px;
+            color: white;
+        }
+        .badge-correct { background-color: var(--success); }
+        .badge-wrong { background-color: var(--danger); }
+    </style>
+</head>
+<body>
+
+    <div style="max-w: 800px; margin: 0 auto 20px auto; padding: 0 10px;">
+        <a href="index.html" style="text-decoration: none; color: var(--primary); font-weight: bold; display: inline-flex; align-items: center; gap: 8px; font-size: 14px; transition: opacity 0.2s; opacity: 0.85;" onmouseover="this.style.opacity=1" onmouseout="this.style.opacity=0.85">
+            <i class="fa-solid fa-arrow-left"></i> Quay lại Lộ trình học
+        </a>
+    </div>
+
+    <div class="quiz-container">
+        <h1>Bài Kiểm Tra Năng Lực C# Memory</h1>
+        <p class="subtitle">Dành cho Frontend Developer lấn sân .NET</p>
+
+        <div id="result" class="result-box"></div>
+
+        <form id="quiz-form">
+            <div class="question-card" id="q1-card">
+                <div class="question-title">Câu 1: Biến kiểu `struct` trong C# mặc định lưu trữ dữ liệu ở vùng nhớ nào và cơ chế gán của nó ra sao?</div>
+                <ul class="options-list">
+                    <li class="option-item"><label><input type="radio" name="q1" value="A"> Lưu trên Heap, gán sao chép tham chiếu (Reference copy)</label></li>
+                    <li class="option-item"><label><input type="radio" name="q1" value="B"> Lưu trên Stack, gán sao chép giá trị (Value copy)</label></li>
+                    <li class="option-item"><label><input type="radio" name="q1" value="C"> Lưu trên Stack, gán sao chép tham chiếu (Reference copy)</label></li>
+                </ul>
+                <div class="explanation" id="exp-1">
+                    <strong>Giải thích:</strong> `struct` trong C# định nghĩa một <strong>Value Type</strong>. Dữ liệu của nó nằm hoàn toàn trên <strong>Stack</strong> và khi gán sẽ sao chép toàn bộ giá trị thô, hoàn toàn độc lập với nhau.
+                </div>
+            </div>
+
+            <div class="question-card" id="q2-card">
+                <div class="question-title">Câu 2: Đoạn code C# sau đây sẽ xuất ra màn hình kết quả là gì?</div>
+                <div class="code-block">
+string str1 = "Hello";
+string str2 = str1;
+str2 = "World";
+Console.WriteLine(str1);
+                </div>
+                <ul class="options-list">
+                    <li class="option-item"><label><input type="radio" name="q2" value="A"> World</label></li>
+                    <li class="option-item"><label><input type="radio" name="q2" value="B"> Hello</label></li>
+                    <li class="option-item"><label><input type="radio" name="q2" value="C"> Lỗi biên dịch (Compile Error)</label></li>
+                </ul>
+                <div class="explanation" id="exp-2">
+                    <strong>Giải thích:</strong> `string` trong C# là một <strong>Reference Type</strong>, tuy nhiên nó lại mang tính chất <strong>Bất biến (Immutable)</strong> giống hệt JavaScript. Khi bạn gán `str2 = "World"`, C# tạo ra một object string mới hoàn toàn trên Heap cho `str2`, biến `str1` vẫn trỏ về chuỗi "Hello" ban đầu.
+                </div>
+            </div>
+
+            <div class="question-card" id="q3-card">
+                <div class="question-title">Câu 3: Đâu là điểm khác biệt lớn nhất giữa việc truyền tham số có từ khóa `ref` và không có `ref` đối với một **Value Type** (ví dụ: `int`)?</div>
+                <ul class="options-list">
+                    <li class="option-item"><label><input type="radio" name="q3" value="A"> Không có ref: Truyền giá trị (bản sao); Có ref: Truyền trực tiếp địa chỉ ô nhớ gốc trên Stack.</label></li>
+                    <li class="option-item"><label><input type="radio" name="q3" value="B"> Không có ref: Lưu ở Stack; Có ref: Đẩy biến đó lên Heap để xử lý.</label></li>
+                    <li class="option-item"><label><input type="radio" name="q3" value="C"> Cả hai cơ chế hoạt động giống hệt nhau, từ khóa ref chỉ để tăng tính tường minh.</label></li>
+                </ul>
+                <div class="explanation" id="exp-3">
+                    <strong>Giải thích:</strong> Từ khóa `ref` ép C# chuyển từ cơ chế truyền giá trị (Pass-by-value) sang truyền tham chiếu thực thụ (Pass-by-reference), cho phép hàm chỉnh sửa trực tiếp dữ liệu của biến gốc nằm trên Stack của hàm gọi.
+                </div>
+            </div>
+
+            <div class="question-card" id="q4-card">
+                <div class="question-title">Câu 4: Điểm tương đồng nào sau đây giữa C# và JavaScript/React là ĐÚNG?</div>
+                <ul class="options-list">
+                    <li class="option-item"><label><input type="radio" name="q4" value="A"> C# Class tương đương với Primitive Type trong JS.</label></li>
+                    <li class="option-item"><label><input type="radio" name="q4" value="B"> Bản chất gán Object của JS giống hệt với cơ chế gán Reference Type trên Heap của C#.</label></li>
+                    <li class="option-item"><label><input type="radio" name="q4" value="C"> Cả hai ngôn ngữ đều bắt buộc lập trình viên tự giải phóng bộ nhớ bằng tay.</label></li>
+                </ul>
+                <div class="explanation" id="exp-4">
+                    <strong>Giải thích:</strong> Cả `Object` trong JS và `Reference Type` (Class) trong C# đều lưu dữ liệu thực tế tại vùng nhớ động (Heap) và gán biến thông qua việc sao chép con trỏ địa chỉ.
+                </div>
+            </div>
+
+            <button type="button" class="btn-submit" onclick="checkAnswers()">Nộp Bài & Xem Kết Quả</button>
+        </form>
+    </div>
+
+    <script>
+        const answers = { q1: "B", q2: "B", q3: "A", q4: "B" };
+
+        function checkAnswers() {
+            let score = 0;
+            const total = Object.keys(answers).length;
+            const form = document.getElementById('quiz-form');
+
+            for (let key in answers) {
+                const checkedRadio = form.querySelector(`input[name="${key}"]:checked`);
+                const card = document.getElementById(`${key}-card`);
+                const exp = document.getElementById(`exp-${key.replace('q', '')}`);
+                
+                // Hiển thị giải thích
+                if(exp) exp.style.display = 'block';
+
+                // Xoá class cũ nếu có
+                card.classList.remove('correct-card', 'wrong-card');
+                
+                // Xóa badge cũ nếu có
+                const oldBadge = card.querySelector('.badge');
+                if (oldBadge) oldBadge.remove();
+
+                if (checkedRadio && checkedRadio.value === answers[key]) {
+                    score++;
+                    card.classList.add('correct-card');
+                    card.querySelector('.question-title').innerHTML += `<span class="badge badge-correct">Đúng</span>`;
+                } else {
+                    card.classList.add('wrong-card');
+                    card.querySelector('.question-title').innerHTML += `<span class="badge badge-wrong">Sai</span>`;
+                }
+            }
+
+            // Hiển thị tổng điểm
+            const resultBox = document.getElementById('result');
+            resultBox.style.display = 'block';
+            resultBox.style.background = score === total ? '#c6f6d5' : '#feebc8';
+            resultBox.style.color = score === total ? '#22543d' : '#744210';
+            resultBox.innerHTML = `Bạn đạt được ${score}/${total} câu chính xác! 🎉`;
+            
+            // Cuộn lên đầu trang xem điểm
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+    </script>
+</body>
+</html>

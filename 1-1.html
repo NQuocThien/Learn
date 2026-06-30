@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Minh họa Bộ nhớ C# (Stack vs Heap)</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #007acc;
+            --success: #28a745;
+            --warning: #ffc107;
+            --dark: #1e1e1e;
+            --light: #f4f4f9;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--light);
+            color: #333;
+            margin: 0;
+            padding: 20px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        h1 { color: var(--primary); }
+
+        .container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .panel {
+            background: white;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        .full-width {
+            grid-column: 1 / -1;
+        }
+
+        .memory-layout {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            background: #e9ecef;
+            padding: 15px;
+            border-radius: 8px;
+        }
+
+        .memory-box {
+            background: white;
+            border: 2px solid #ccc;
+            border-radius: 6px;
+            min-height: 250px;
+            padding: 10px;
+        }
+
+        .memory-box h3 {
+            margin-top: 0;
+            text-align: center;
+            padding-bottom: 10px;
+            border-bottom: 2px solid var(--primary);
+            color: var(--primary);
+        }
+
+        .stack-container {
+            display: flex;
+            flex-direction: column-reverse;
+            gap: 8px;
+        }
+
+        .heap-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            align-content: flex-start;
+        }
+
+        .mem-cell {
+            background: #fff;
+            border: 1px solid #aaa;
+            padding: 8px;
+            border-radius: 4px;
+            font-family: monospace;
+            font-size: 14px;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .stack-cell {
+            border-left: 5px solid var(--success);
+            background: #f8fff9;
+        }
+
+        .heap-cell {
+            border-left: 5px solid var(--warning);
+            background: #fffdf3;
+            min-width: 120px;
+        }
+
+        .pointer {
+            color: #d9534f;
+            font-weight: bold;
+        }
+
+        button {
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            font-size: 15px;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-right: 10px;
+            margin-bottom: 10px;
+            transition: background 0.2s;
+        }
+
+        button:hover { background-color: #005999; }
+        button.btn-clear { background-color: #6c757d; }
+        button.btn-clear:hover { background-color: #5a6268; }
+
+        pre {
+            background: var(--dark);
+            color: #fff;
+            padding: 15px;
+            border-radius: 6px;
+            overflow-x: auto;
+            font-size: 14px;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body>
+
+    <div style="max-w: 1200px; margin: 20px auto 0 auto; padding: 0 20px;">
+        <a href="index.html" style="text-decoration: none; color: var(--primary); font-weight: bold; display: inline-flex; align-items: center; gap: 8px; font-size: 14px; transition: opacity 0.2s; opacity: 0.85;" onmouseover="this.style.opacity=1" onmouseout="this.style.opacity=0.85">
+            <i class="fa-solid fa-arrow-left"></i> Quay lại Lộ trình học
+        </a>
+    </div>
+
+    <header style="margin-top: 10px;">
+        <h1>Minh họa Cơ chế Bộ nhớ C# cho Frontend Developer</h1>
+        <p>Học cách <strong>Stack</strong> và <strong>Heap</strong> phân bổ dữ liệu trực quan qua các dòng lệnh</p>
+    </header>
+
+    <div class="container">
+        <div class="panel">
+            <h3>Khối Lệnh Thực Thi (C#)</h3>
+            <div style="margin-bottom: 15px;">
+                <button onclick="runStep(1)">1. Khởi tạo Value Type (int x = 10)</button>
+                <button onclick="runStep(2)">2. Khởi tạo Reference Type (User u1)</button>
+                <button onclick="runStep(3)">3. Copy Value Type (int y = x)</button>
+                <button onclick="runStep(4)">4. Copy Reference Type (User u2 = u1)</button>
+                <button class="btn-clear" onclick="resetMemory()">Reset Bộ Nhớ</button>
+            </div>
+            
+            <h4>Code C# tương ứng:</h4>
+            <pre id="code-display">// Click các nút bên trên để thực thi từng dòng lệnh...</pre>
+        </div>
+
+        <div class="panel">
+            <h3>Trạng thái Bộ nhớ RAM</h3>
+            <div class="memory-layout">
+                <div class="memory-box">
+                    <h3>STACK (LIFO)</h3>
+                    <div id="stack" class="stack-container">
+                        </div>
+                </div>
+                
+                <div class="memory-box">
+                    <h3>HEAP (Dynamic)</h3>
+                    <div id="heap" class="heap-container">
+                        </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="panel full-width">
+            <h3>Giải thích Hiện tượng:</h3>
+            <div id="explanation" style="font-size: 16px; line-height: 1.6; color: #444;">
+                Click vào các nút tính năng để xem cách C# quản lý và chuyển đổi dữ liệu trong bộ nhớ ngầm định.
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const stackEl = document.getElementById('stack');
+        const heapEl = document.getElementById('heap');
+        const codeEl = document.getElementById('code-display');
+        const expEl = document.getElementById('explanation');
+
+        function resetMemory() {
+            stackEl.innerHTML = '<div style="text-align:center; color:#aaa; padding:20px;">Stack trống</div>';
+            heapEl.innerHTML = '<div style="text-align:center; color:#aaa; padding:20px; width:100%;">Heap trống</div>';
+            codeEl.innerHTML = '// Bộ nhớ đã được làm sạch.';
+            expEl.innerHTML = 'Bộ nhớ trống. Hãy bắt đầu bấm các bước thực thi từ 1 đến 4.';
+        }
+
+        function runStep(step) {
+            if (step === 1) {
+                // Clear default text if any
+                stackEl.innerHTML = '';
+                
+                // Add code
+                codeEl.innerHTML = `int x = 10;\n// Giá trị nguyên thủy được đẩy trực tiếp vào STACK`;
+                
+                // Update Stack
+                stackEl.innerHTML = `<div class="mem-cell stack-cell"><strong>Biến:</strong> x <br> <strong>Giá trị:</strong> 10</div>`;
+                
+                // Update Explanation
+                expEl.innerHTML = `<strong>Phân tích:</strong> <code>int</code> là một <strong>Value Type</strong>. C# cấp phát trực tiếp một ô nhớ trên <strong>Stack</strong> để lưu giá trị <code>10</code>. Quá trình này diễn ra cực kỳ nhanh chóng. Tương tự như biến số (number) trong JavaScript.`;
+            } 
+            else if (step === 2) {
+                // Add code
+                codeEl.innerHTML = `int x = 10;\nUser u1 = new User() { Name = "Tom" };\n// Đối tượng nằm trên HEAP, con trỏ nằm trên STACK`;
+                
+                // Update Stack & Heap
+                stackEl.innerHTML = `
+                    <div class="mem-cell stack-cell"><strong>Biến:</strong> x <br> <strong>Giá trị:</strong> 10</div>
+                    <div class="mem-cell stack-cell"><strong>Biến:</strong> u1 <br> <strong>Giá trị:</strong> <span class="pointer">@Address_0xAF1</span></div>
+                `;
+                heapEl.innerHTML = `
+                    <div class="mem-cell heap-cell"><strong>Địa chỉ:</strong> 0xAF1<br><strong>Object:</strong><br>{ Name: "Tom" }</div>
+                `;
+                
+                expEl.innerHTML = `<strong>Phân tích:</strong> <code>User</code> (Class) là một <strong>Reference Type</strong>. Từ khóa <code>new</code> bắt buộc C# xin một vùng trống dưới <strong>Heap</strong> để chứa dữ liệu của Object <code>{ Name: "Tom" }</code> tại địa chỉ <code>0xAF1</code>. Sau đó, biến <code>u1</code> trên <strong>Stack</strong> chỉ lưu duy nhất cái địa chỉ vùng nhớ đó. Giống hệt cách JS lưu Object / Array.`;
+            }
+            else if (step === 3) {
+                codeEl.innerHTML = `int x = 10;\nUser u1 = new User() { Name = "Tom" };\nint y = x;\n// Nhân bản hoàn toàn giá trị mới`;
+                
+                stackEl.innerHTML = `
+                    <div class="mem-cell stack-cell"><strong>Biến:</strong> x <br> <strong>Giá trị:</strong> 10</div>
+                    <div class="mem-cell stack-cell"><strong>Biến:</strong> u1 <br> <strong>Giá trị:</strong> <span class="pointer">@Address_0xAF1</span></div>
+                    <div class="mem-cell stack-cell"><strong>Biến:</strong> y <br> <strong>Giá trị:</strong> 10 <span style="color:green">(Copy)</span></div>
+                `;
+                
+                expEl.innerHTML = `<strong>Phân tích hành vi sao chép Value Type:</strong> Khi bạn gán <code>y = x</code>, C# nhân bản giá trị dữ liệu thô của <code>x</code> sang một ô nhớ hoàn toàn mới cho <code>y</code> trên Stack. Lúc này nếu bạn thay đổi <code>y = 20</code>, biến <code>x</code> vẫn sẽ là <code>10</code>.`;
+            }
+            else if (step === 4) {
+                codeEl.innerHTML = `int x = 10;\nUser u1 = new User() { Name = "Tom" };\nint y = x;\nUser u2 = u1;\n// Chỉ sao chép địa chỉ vùng nhớ!`;
+                
+                stackEl.innerHTML = `
+                    <div class="mem-cell stack-cell"><strong>Biến:</strong> x <br> <strong>Giá trị:</strong> 10</div>
+                    <div class="mem-cell stack-cell"><strong>Biến:</strong> u1 <br> <strong>Giá trị:</strong> <span class="pointer">@Address_0xAF1</span></div>
+                    <div class="mem-cell stack-cell"><strong>Biến:</strong> y <br> <strong>Giá trị:</strong> 10</div>
+                    <div class="mem-cell stack-cell"><strong>Biến:</strong> u2 <br> <strong>Giá trị:</strong> <span class="pointer">@Address_0xAF1 (Copy)</span></div>
+                `;
+                
+                expEl.innerHTML = `<strong>Phân tích hành vi sao chép Reference Type:</strong> Khi gán <code>u2 = u1</code>, C# <strong>KHÔNG</strong> nhân bản Object trên Heap. Nó chỉ nhân bản cái địa chỉ <code>@Address_0xAF1</code> từ <code>u1</code> sang <code>u2</code> trên Stack. Hiện tại, cả <code>u1</code> và <code>u2</code> đều trỏ chung vào một thực thể. Nếu bạn đổi <code>u2.Name = "Alice"</code>, <code>u1.Name</code> cũng bị đổi theo! Đây chính là hiện tượng <strong>Mutation</strong> quen thuộc trong React.`;
+            }
+        }
+
+        // Khởi tạo ban đầu
+        resetMemory();
+    </script>
+</body>
+</html>

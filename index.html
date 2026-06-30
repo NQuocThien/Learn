@@ -252,13 +252,64 @@
             ]
         };
 
+        // Check file availability (smart check for file:// and http://)
+        function checkFileLink(url, elementId, isExercise) {
+            const knownExist = isExercise ? ['ex-1-1.html', 'ex-1-2.html'] : ['1-1.html', '1-2.html'];
+            const el = document.getElementById(elementId);
+            if (!el) return;
+
+            if (window.location.protocol === 'file:') {
+                if (!knownExist.includes(url)) {
+                    el.classList.add('opacity-40');
+                    el.title = isExercise 
+                        ? "Bài tập chưa được tạo hoặc đang được chuẩn bị (Click để thử)" 
+                        : "Trang mô phỏng chưa được tạo hoặc đang được chuẩn bị (Click để thử)";
+                }
+            } else {
+                fetch(url, { method: 'HEAD' })
+                    .then(res => {
+                        if (!res.ok) {
+                            el.classList.add('opacity-40');
+                            el.title = isExercise 
+                                ? "Chưa có bài tập cho ngày này" 
+                                : "Chưa có trang mô phỏng cho ngày này";
+                        }
+                    })
+                    .catch(() => {
+                        if (!knownExist.includes(url)) {
+                            el.classList.add('opacity-40');
+                        }
+                    });
+            }
+        }
+
         // Render dynamic day cards
         function renderRoadmap() {
             for (const [phase, tasks] of Object.entries(roadmapData)) {
                 const container = document.getElementById(`list-${phase}`);
                 if (!container) continue;
                 
-                tasks.forEach(task => {
+                tasks.forEach((task, index) => {
+                    const phaseNum = phase.replace('phase', '');
+                    const simulationUrl = `${phaseNum}-${index + 1}.html`;
+                    const exerciseUrl = `ex-${phaseNum}-${index + 1}.html`;
+                    
+                    let btnColorClass = "";
+                    let exBtnColorClass = "";
+                    if (phase === 'phase1') {
+                        btnColorClass = "bg-blue-600/80 hover:bg-blue-500 text-white border border-blue-500/30";
+                        exBtnColorClass = "border border-blue-500/50 hover:bg-blue-500/10 text-blue-300";
+                    } else if (phase === 'phase2') {
+                        btnColorClass = "bg-emerald-600/80 hover:bg-emerald-500 text-white border border-emerald-500/30";
+                        exBtnColorClass = "border border-emerald-500/50 hover:bg-emerald-500/10 text-emerald-300";
+                    } else if (phase === 'phase3') {
+                        btnColorClass = "bg-amber-600/80 hover:bg-amber-500 text-white border border-amber-500/30";
+                        exBtnColorClass = "border border-amber-500/50 hover:bg-amber-500/10 text-amber-300";
+                    } else if (phase === 'phase4') {
+                        btnColorClass = "bg-fuchsia-600/80 hover:bg-fuchsia-500 text-white border border-fuchsia-500/30";
+                        exBtnColorClass = "border border-fuchsia-500/50 hover:bg-fuchsia-500/10 text-fuchsia-300";
+                    }
+
                     const card = document.createElement('div');
                     card.className = "day-card bg-gray-800/40 border border-gray-800 rounded-xl p-4 flex gap-4 items-start hover:border-gray-700 hover:bg-gray-800/60 transition shadow-sm relative";
                     card.innerHTML = `
@@ -269,13 +320,29 @@
                                 <span class="text-[10px] bg-purple-950/60 text-purple-300 border border-purple-800/50 px-2 py-0.5 rounded flex items-center gap-1"><i class="fa-solid fa-terminal text-[9px]"></i> Click to Prompt</span>
                             </div>
                             <p class="text-xs text-gray-400 leading-relaxed">${task.desc}</p>
-                            <div class="pt-2 flex flex-wrap gap-1.5 items-center">
-                                <span class="text-[10px] font-bold text-gray-500 uppercase tracking-wider"><i class="fa-solid fa-language text-xs"></i> Vocab:</span>
-                                ${task.vocab.split(', ').map(k => `<span class="text-[10px] bg-gray-900/80 text-purple-400 border border-gray-800 px-2 py-0.5 rounded font-mono">${k}</span>`).join('')}
+                            <div class="pt-3 mt-2 border-t border-gray-800/40 flex flex-wrap justify-between items-center gap-3">
+                                <div class="flex flex-wrap gap-1.5 items-center">
+                                    <span class="text-[10px] font-bold text-gray-500 uppercase tracking-wider"><i class="fa-solid fa-language text-[9px]"></i> Vocab:</span>
+                                    ${task.vocab.split(', ').map(k => `<span class="text-[10px] bg-gray-900/80 text-purple-400 border border-gray-800 px-2 py-0.5 rounded font-mono">${k}</span>`).join('')}
+                                </div>
+                                <div class="flex items-center gap-2">
+                                    <a href="${simulationUrl}" id="sim-link-${task.id}" onclick="event.stopPropagation();" class="sim-btn inline-flex items-center gap-1 px-2.5 py-1 rounded-md text-[10px] font-bold transition-all duration-200 hover:scale-105 active:scale-95 shadow-sm hover:opacity-100 ${btnColorClass}">
+                                        <i class="fa-solid fa-chart-line text-[11px]"></i> Mô phỏng
+                                    </a>
+                                    <a href="${exerciseUrl}" id="ex-link-${task.id}" onclick="event.stopPropagation();" class="ex-btn inline-flex items-center gap-1 px-2.5 py-1 rounded-md text-[10px] font-bold transition-all duration-200 hover:scale-105 active:scale-95 shadow-sm hover:opacity-100 ${exBtnColorClass}">
+                                        <i class="fa-solid fa-file-signature text-[11px]"></i> Bài tập
+                                    </a>
+                                </div>
                             </div>
                         </div>
                     `;
                     container.appendChild(card);
+                    
+                    // Check file availability asynchronously
+                    setTimeout(() => {
+                        checkFileLink(simulationUrl, `sim-link-${task.id}`, false);
+                        checkFileLink(exerciseUrl, `ex-link-${task.id}`, true);
+                    }, 0);
                 });
             }
             loadProgress();

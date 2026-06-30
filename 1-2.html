@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>C# Backend Learning Playground for FE Devs</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .gradient-bg {
+            background: linear-gradient(135deg, #111827 0%, #1e1b4b 100%);
+        }
+
+        .code-line {
+            transition: all 0.3s ease;
+        }
+
+        .highlight-code {
+            background-color: rgba(168, 85, 247, 0.25);
+            border-left: 4px solid #a855f7;
+            padding-left: 4px;
+        }
+    </style>
+</head>
+
+<body class="bg-gray-950 text-gray-100 font-sans min-h-screen pb-12">
+
+
+    <div class="max-w-6xl mx-auto px-4 md:px-8 pt-6">
+        <a href="index.html"
+            class="inline-flex items-center gap-2 text-purple-400 hover:text-purple-300 font-semibold text-sm transition-colors">
+            <i class="fa-solid fa-arrow-left"></i> Quay lại Lộ trình học
+        </a>
+    </div>
+    <header class="gradient-bg py-6 px-6 text-center border-b border-gray-800 shadow-xl">
+        <h1
+            class="text-2xl md:text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-indigo-400 to-purple-400">
+            C# .NET Core Concepts Visualizer
+        </h1>
+        <p class="text-gray-400 mt-1 text-xs md:text-sm">Dành riêng cho Lập trình viên Frontend chuyển giao sang Hệ
+            thống Backend .NET</p>
+    </header>
+
+    <main class="max-w-7xl mx-auto p-4 md:p-6 space-y-12">
+
+        <section class="bg-gray-900/60 rounded-2xl p-6 border border-gray-800 shadow-lg space-y-6">
+            <div class="border-l-4 border-emerald-500 pl-3">
+                <h2 class="text-lg font-bold text-emerald-400 uppercase tracking-wide">1. Tính Đóng Gói (Encapsulation)
+                    & C# Properties</h2>
+                <p class="text-gray-400 text-xs mt-0.5">Thử nghiệm cơ chế bảo vệ dữ liệu nội bộ thông qua thuộc tính {
+                    get; set; }</p>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+                <div class="lg:col-span-6 space-y-4">
+                    <div class="bg-gray-950 p-5 rounded-xl border border-gray-800 space-y-4">
+                        <label class="block text-xs font-bold uppercase tracking-wider text-gray-400">
+                            Nhập số tuổi để kiểm tra Logic Đóng Gói:
+                        </label>
+                        <div class="flex gap-3">
+                            <input type="number" id="ageInput" value="-5"
+                                class="bg-gray-900 border border-gray-700 rounded-lg px-4 py-2 w-full text-sm text-white focus:outline-none focus:border-emerald-500"
+                                placeholder="Ví dụ: 25 hoặc -5">
+                            <button onclick="trySetAge()"
+                                class="bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs uppercase tracking-wider px-5 py-2 rounded-lg transition-colors shadow-md shrink-0">
+                                Thực thi Set
+                            </button>
+                        </div>
+                        <div id="simulationResult" class="p-3 rounded-lg hidden text-xs font-mono border"></div>
+                    </div>
+
+                    <div class="grid grid-cols-2 gap-4 text-center">
+                        <div id="monitor-field"
+                            class="bg-gray-950 p-4 rounded-xl border border-gray-800 transition-all">
+                            <span class="text-[10px] text-gray-500 block uppercase tracking-wider font-bold">Biến ẩn nội
+                                bộ (_age)</span>
+                            <span id="backingFieldDisplay" class="text-2xl font-bold text-gray-400 font-mono">0</span>
+                        </div>
+                        <div id="monitor-prop" class="bg-gray-950 p-4 rounded-xl border border-gray-800 transition-all">
+                            <span class="text-[10px] text-gray-500 block uppercase tracking-wider font-bold">Property
+                                Công Khai (Age)</span>
+                            <span id="propertyDisplay" class="text-2xl font-bold text-emerald-400 font-mono">0</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div
+                    class="lg:col-span-6 flex flex-col justify-between bg-gray-950 p-4 rounded-xl border border-gray-800 font-mono text-xs text-gray-300">
+                    <div>
+                        <span class="text-gray-600 block mb-1">// Mã nguồn C# Đóng Gói thuộc tính đầy đủ (Full
+                            Property)</span>
+                        <span class="text-blue-400">public class</span> <span
+                            class="text-emerald-400">Account</span><br>
+                        {<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">private int</span> _age; <span
+                            class="text-gray-600">// Backing field (Bị giấu kín)</span><br><br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">public int</span> Age<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;{<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">get</span> =>
+                        _age;<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">set</span><br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{<br>
+                        <div id="code-validate-line" class="code-line">
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span
+                                class="text-purple-400">if</span> (value < <span class="text-amber-400">0</span>) <span
+                                    class="text-purple-400">throw new</span> <span
+                                    class="text-blue-400">ArgumentException</span>(<span class="text-orange-400">"Lỗi
+                                    tuổi âm!"</span>);</div>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;_age = value;<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;}<br>
+                        }
+                    </div>
+                    <div class="mt-4 border-t border-gray-900 pt-3 text-gray-400 font-sans text-xs">
+                        💡 <strong>Góc nhìn FE:</strong> Giống như bạn viết một `set` trap trong ES6 Proxy hoặc
+                        getter/setter trong Class của TypeScript. Nó bảo vệ vùng nhớ nội bộ không bị ghi đè dữ liệu rác.
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <section class="bg-gray-900/60 rounded-2xl p-6 border border-gray-800 shadow-lg space-y-6">
+            <div class="border-l-4 border-purple-500 pl-3">
+                <h2 class="text-lg font-bold text-purple-400 uppercase tracking-wide">2. Bản đồ trực quan hóa Access
+                    Modifiers</h2>
+                <p class="text-gray-400 text-xs mt-0.5">Chọn một từ khóa điều khiển truy cập để xem ranh giới hoạt động
+                    trong Enterprise Project</p>
+            </div>
+
+            <div
+                class="bg-gray-950 p-3 rounded-xl border border-gray-800 flex flex-col sm:flex-row items-center justify-between gap-3">
+                <span class="text-xs font-bold text-gray-400 uppercase tracking-wider">Chọn Access Modifier:</span>
+                <div class="flex flex-wrap gap-2 w-full sm:w-auto">
+                    <button onclick="changeModifier('public')" id="btn-public"
+                        class="flex-1 sm:flex-none px-4 py-2 rounded-lg text-xs font-bold uppercase tracking-wider transition-all bg-indigo-600 text-white shadow-lg shadow-indigo-900/40">public</button>
+                    <button onclick="changeModifier('internal')" id="btn-internal"
+                        class="flex-1 sm:flex-none px-4 py-2 rounded-lg text-xs font-bold uppercase tracking-wider transition-all bg-gray-800 text-gray-400 hover:bg-gray-700">internal</button>
+                    <button onclick="changeModifier('protected')" id="btn-protected"
+                        class="flex-1 sm:flex-none px-4 py-2 rounded-lg text-xs font-bold uppercase tracking-wider transition-all bg-gray-800 text-gray-400 hover:bg-gray-700">protected</button>
+                    <button onclick="changeModifier('private')" id="btn-private"
+                        class="flex-1 sm:flex-none px-4 py-2 rounded-lg text-xs font-bold uppercase tracking-wider transition-all bg-gray-800 text-gray-400 hover:bg-gray-700">private</button>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+
+                <div class="lg:col-span-7 space-y-6">
+                    <div id="assembly-core"
+                        class="bg-gray-950 p-5 rounded-xl border border-gray-800 space-y-4 shadow-md transition-all">
+                        <div class="flex justify-between items-center border-b border-gray-900 pb-2">
+                            <span class="text-xs font-bold font-mono text-indigo-400">📦 Project A: Core.dll (Business
+                                Layer)</span>
+                            <span id="badge-core"
+                                class="text-[10px] font-bold px-2 py-0.5 rounded bg-emerald-950 text-emerald-400 border border-emerald-800">TRUY
+                                CẬP ĐƯỢC</span>
+                        </div>
+
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+                            <div class="bg-gray-900 p-4 rounded-lg border border-indigo-500/30 space-y-1">
+                                <div class="flex justify-between items-center">
+                                    <h4 class="text-xs font-bold text-white">Class: UserService</h4>
+                                    <span
+                                        class="text-[9px] px-1.5 py-0.2 bg-indigo-950 text-indigo-300 border border-indigo-800 rounded">Gốc</span>
+                                </div>
+                                <p class="text-[11px] text-gray-400">Nơi khai báo biến/hàm ban đầu.</p>
+                            </div>
+
+                            <div id="box-same-project"
+                                class="bg-gray-900 p-4 rounded-lg border transition-all space-y-1">
+                                <div class="flex justify-between items-center">
+                                    <h4 class="text-xs font-bold text-white">Class: OrderService</h4>
+                                    <span id="badge-same-project" class="text-[9px] px-1.5 py-0.2 rounded"></span>
+                                </div>
+                                <p class="text-[11px] text-gray-400">Một lớp khác nằm chung dự án Core.dll.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="assembly-api"
+                        class="bg-gray-950 p-5 rounded-xl border border-gray-800 space-y-4 shadow-md transition-all">
+                        <div class="flex justify-between items-center border-b border-gray-900 pb-2">
+                            <span class="text-xs font-bold font-mono text-purple-400">📦 Project B: WebAPI.dll
+                                (Presentation Layer)</span>
+                            <span id="badge-api" class="text-[10px] font-bold px-2 py-0.5 rounded"></span>
+                        </div>
+                        <p class="text-[11px] text-gray-600 italic">// WebAPI.dll có tham chiếu (Reference) tới Core.dll
+                        </p>
+
+                        <div id="box-external-project"
+                            class="bg-gray-900 p-4 rounded-lg border transition-all space-y-1">
+                            <div class="flex justify-between items-center">
+                                <h4 class="text-xs font-bold text-white">Class: UserController</h4>
+                                <span id="badge-external-project" class="text-[9px] px-1.5 py-0.2 rounded"></span>
+                            </div>
+                            <p class="text-[11px] text-gray-400">Nằm ở dự án độc lập bên ngoài, muốn gọi code của tầng
+                                Core.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="lg:col-span-5 flex flex-col justify-between space-y-4">
+                    <div
+                        class="bg-gray-950 p-4 rounded-xl border border-gray-800 font-mono text-xs shadow-inner leading-relaxed text-gray-300">
+                        <div><span class="text-gray-600">// File: Core/Services/UserService.cs</span></div>
+                        <div><span class="text-blue-400">public class</span> <span
+                                class="text-emerald-400">UserService</span></div>
+                        <div>{</div>
+                        <div id="code-target" class="code-line py-0.5"> <span class="text-purple-400"
+                                id="code-keyword">public</span> <span class="text-blue-400">string</span> <span
+                                class="text-amber-400">UserData</span> { <span class="text-purple-400">get</span>; <span
+                                class="text-purple-400">set</span>; }</div>
+                        <div>}</div>
+                        <br>
+                        <div><span class="text-gray-600">// File: WebAPI/Controllers/UserController.cs</span></div>
+                        <div><span class="text-blue-400">public class</span> <span
+                                class="text-purple-400">UserController</span></div>
+                        <div>{</div>
+                        <div id="code-call-line" class="code-line py-1"> &nbsp;&nbsp;&nbsp;&nbsp;<span
+                                class="text-blue-400">var</span> service = <span class="text-purple-400">new</span>
+                            <span class="text-emerald-400">UserService</span>();<br> &nbsp;&nbsp;&nbsp;&nbsp;<span
+                                class="text-blue-400">var</span> data = service.<span
+                                class="text-amber-400">UserData</span>; <span class="text-gray-500" id="code-comment">//
+                                Kết quả?</span>
+                        </div>
+                        <div>}</div>
+                    </div>
+
+                    <div class="bg-gray-950 p-4 rounded-xl border border-gray-800 space-y-3">
+                        <div>
+                            <h4 class="text-xs font-bold uppercase tracking-wider text-indigo-400 mb-0.5">💡 Bản chất C#
+                                Backend:</h4>
+                            <p id="desc-csharp" class="text-xs text-gray-300 leading-relaxed"></p>
+                        </div>
+                        <div class="border-t border-gray-900 pt-2">
+                            <h4 class="text-xs font-bold uppercase tracking-wider text-amber-500 mb-0.5">🔁 Đối chiếu
+                                sang TypeScript:</h4>
+                            <p id="desc-ts" class="text-xs text-gray-400 leading-relaxed"></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="text-center text-xs text-gray-600 mt-8">
+        C# & .NET Core Encapsulation Playground • Hoàn chỉnh tích hợp cho FE Developers
+    </footer>
+
+    <script>
+        // --- SECTION 1: ENCAPSULATION SIMULATOR ---
+        let currentAge = 0;
+        function trySetAge() {
+            const inputVal = parseInt(document.getElementById('ageInput').value);
+            const resultDiv = document.getElementById('simulationResult');
+            const validateLine = document.getElementById('code-validate-line');
+
+            resultDiv.classList.remove('hidden', 'bg-red-950', 'text-red-400', 'border-red-800', 'bg-emerald-950', 'text-emerald-400', 'border-emerald-800');
+
+            if (isNaN(inputVal)) {
+                resultDiv.innerText = "⚠️ Cảnh báo: Vui lòng nhập một số nguyên!";
+                resultDiv.classList.add('bg-red-950', 'text-red-400', 'border-red-800');
+                return;
+            }
+
+            // Kích hoạt hiệu ứng chớp sáng dòng kiểm tra lỗi trong code C#
+            validateLine.className = "code-line bg-purple-900/40 border-l-2 border-purple-500 pl-1";
+            setTimeout(() => { validateLine.className = "code-line"; }, 500);
+
+            if (inputVal < 0) {
+                // Thất bại do vi phạm điều kiện Đóng gói
+                resultDiv.innerHTML = `❌ <strong>ArgumentException:</strong> Age cannot be negative! <br><span class="text-gray-400 text-[11px]">Hệ thống bảo vệ thành công. Trị số trong bộ nhớ giữ nguyên.</span>`;
+                resultDiv.classList.add('bg-red-950', 'text-red-400', 'border-red-800');
+
+                document.getElementById('monitor-field').className = "bg-gray-950 p-4 rounded-xl border border-red-800/60 transition-all";
+                setTimeout(() => { document.getElementById('monitor-field').className = "bg-gray-950 p-4 rounded-xl border border-gray-800"; }, 400);
+            } else {
+                // Thành công
+                currentAge = inputVal;
+                resultDiv.innerHTML = `✔️ <strong>Success:</strong> Gán dữ liệu thành công qua Property!<br><span class="text-gray-400 text-[11px]">_age ẩn đã nhận giá trị mới: ${inputVal}.</span>`;
+                resultDiv.classList.add('bg-emerald-950', 'text-emerald-400', 'border-emerald-800');
+
+                document.getElementById('backingFieldDisplay').innerText = currentAge;
+                document.getElementById('propertyDisplay').innerText = currentAge;
+
+                document.getElementById('monitor-prop').className = "bg-gray-950 p-4 rounded-xl border border-emerald-800/60 transition-all";
+                setTimeout(() => { document.getElementById('monitor-prop').className = "bg-gray-950 p-4 rounded-xl border border-gray-800"; }, 400);
+            }
+        }
+
+        // --- SECTION 2: ACCESS MODIFIERS CONFIGURATION ---
+        const mappingData = {
+            public: {
+                sameProjectAllowed: true,
+                externalProjectAllowed: true,
+                badgeSame: "ALLOWED",
+                badgeExternal: "ALLOWED",
+                comment: "// ✅ Hợp lệ hoàn toàn!",
+                csharp: "Từ khóa 'public' mở phạm vi tối đa. UserController thuộc dự án độc lập WebAPI.dll thoải mái truy xuất và chỉnh sửa thuộc tính 'UserData' mà không gặp rào cản nào.",
+                ts: "Tương thích 100% với việc đặt 'export class' hoặc 'public' trong TS. Mọi file ở mọi module, folder khác nhau đều import vào sử dụng chung được."
+            },
+            internal: {
+                sameProjectAllowed: true,
+                externalProjectAllowed: false,
+                badgeSame: "ALLOWED",
+                badgeExternal: "BLOCKED",
+                comment: "// ❌ LỖI COMPILER! Dự án ngoài (WebAPI) không được phép truy cập mã internal.",
+                csharp: "Chỉ cho phép nội bộ Assembly! Chỉ có người anh em cùng chung dự án Core.dll (OrderService) sờ thấy được. Project B (WebAPI) dù có tham chiếu sang cũng bị Compiler ẩn giấu đi hoàn toàn.",
+                ts: "TS không có từ khóa này. Nó tương đương việc bạn viết code trong một Module/File nhưng KHÔNG 'export'. Chỉ các thành phần thuộc phạm vi file/thư mục cục bộ đó tự gọi nhau."
+            },
+            protected: {
+                sameProjectAllowed: true,
+                externalProjectAllowed: false,
+                badgeSame: "ALLOWED (Nếu kế thừa)",
+                badgeExternal: "BLOCKED",
+                comment: "// ❌ LỖI BIÊN DỊCH! UserController là class độc lập, không nằm trong cây kế thừa.",
+                csharp: "Ràng buộc gia phả! Chỉ những class nào thiết lập quan hệ kế thừa (Inheritance) từ class UserService mới được quyền đọc ghi thuộc tính này, người ngoài dự án sẽ bị chặn chặn đứng.",
+                ts: "Giống hoàn toàn 100% từ khóa 'protected' trong Class OOP của TypeScript. Phục vụ cho mục đích bảo vệ tài sản cốt lõi trong mô hình cha - con."
+            },
+            private: {
+                sameProjectAllowed: false,
+                externalProjectAllowed: false,
+                badgeSame: "BLOCKED",
+                badgeExternal: "BLOCKED",
+                comment: "// ❌ LỖI NẶNG! private khóa chặt thuộc tính, bên ngoài không ai sờ được.",
+                csharp: "Mức độ cô lập cao nhất. Chỉ duy nhất các hàm nằm trong cùng cặp dấu ngoặc nhọn {} của chính class UserService mới có quyền truy cập. Giúp tạo nên lõi đóng gói siêu an toàn.",
+                ts: "Giống như 'private' hoặc ký hiệu '#' của ES6 trong TypeScript. Điểm khác là C# ép chặt ở mức Runtime (khi chạy app), còn TS private sẽ biến mất khi bị dịch sang JavaScript thuần."
+            }
+        };
+
+        function changeModifier(mod) {
+            // Đổi trạng thái active nút bấm
+            document.querySelectorAll('button[id^="btn-"]').forEach(btn => {
+                btn.className = "flex-1 sm:flex-none px-4 py-2 rounded-lg text-xs font-bold uppercase tracking-wider transition-all bg-gray-800 text-gray-400 hover:bg-gray-700";
+            });
+            document.getElementById(`btn-${mod}`).className = "flex-1 sm:flex-none px-4 py-2 rounded-lg text-xs font-bold uppercase tracking-wider transition-all bg-indigo-600 text-white shadow-lg shadow-indigo-900/40";
+
+            const config = mappingData[mod];
+
+            // Cập nhật text code trực quan
+            document.getElementById('code-keyword').innerText = mod;
+            document.getElementById('code-comment').innerText = config.comment;
+
+            // Đổi màu dòng lệnh gọi hàm (Đỏ nếu lỗi, Xanh nếu chạy được)
+            document.getElementById('code-call-line').className = config.externalProjectAllowed
+                ? "code-line py-1 bg-emerald-950/40 border-l-4 border-emerald-500 pl-1"
+                : "code-line py-1 bg-red-950/40 border-l-4 border-red-500 pl-1";
+
+            // Hiệu ứng nháy sáng dòng code thay đổi từ khóa
+            document.getElementById('code-target').className = "code-line py-0.5 highlight-code";
+            setTimeout(() => { document.getElementById('code-target').className = "code-line py-0.5"; }, 300);
+
+            // Cập nhật các Box mô phỏng kiến trúc
+            updateBoxVisual('box-same-project', 'badge-same-project', config.sameProjectAllowed, config.badgeSame);
+            updateBoxVisual('box-external-project', 'badge-external-project', config.externalProjectAllowed, config.badgeExternal);
+
+            // Cập nhật tổng thể Block WebAPI Project
+            const apiAssembly = document.getElementById('assembly-api');
+            const apiBadge = document.getElementById('badge-api');
+            if (config.externalProjectAllowed) {
+                apiAssembly.className = "bg-gray-950 p-5 rounded-xl border border-emerald-800/80 shadow-md transition-all opacity-100";
+                apiBadge.className = "text-[10px] font-bold px-2 py-0.5 rounded bg-emerald-950 text-emerald-400 border border-emerald-800";
+                apiBadge.innerText = "NHÌN THẤY CODE A";
+            } else {
+                apiAssembly.className = "bg-gray-950/40 p-5 rounded-xl border border-gray-900/60 shadow-md transition-all opacity-40 select-none";
+                apiBadge.className = "text-[10px] font-bold px-2 py-0.5 rounded bg-red-950 text-red-400 border border-red-900";
+                apiBadge.innerText = "BỊ MÙ (ẨN CODE)";
+            }
+
+            // Ghi giải thích bằng text
+            document.getElementById('desc-csharp').innerText = config.csharp;
+            document.getElementById('desc-ts').innerText = config.ts;
+        }
+
+        function updateBoxVisual(boxId, badgeId, isAllowed, text) {
+            const box = document.getElementById(boxId);
+            const badge = document.getElementById(badgeId);
+
+            if (isAllowed) {
+                box.className = "bg-gray-900 p-4 rounded-lg border border-emerald-600/40 space-y-1 opacity-100 text-gray-200";
+                badge.innerText = text;
+                badge.className = "text-[9px] px-1.5 py-0.2 bg-emerald-950 text-emerald-400 border border-emerald-800 rounded font-bold";
+            } else {
+                box.className = "bg-gray-900/30 p-4 rounded-lg border border-red-900/30 space-y-1 opacity-30 text-gray-600 line-through select-none";
+                badge.innerText = text;
+                badge.className = "text-[9px] px-1.5 py-0.2 bg-red-950 text-red-400 border border-red-900 rounded font-bold";
+            }
+        }
+
+        // Khởi tạo trang với cấu hình Public mặc định
+        changeModifier('public');
+        trySetAge(); // Khởi chạy simulator phần 1
+    </script>
+</body>
+
+</html>

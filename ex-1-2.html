@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>C# .NET Backend Certification Lab</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .gradient-bg {
+            background: linear-gradient(135deg, #020617 0%, #0f172a 100%);
+        }
+    </style>
+</head>
+<body class="bg-slate-950 text-slate-100 font-sans min-h-screen pb-20">
+
+    <div class="max-w-4xl mx-auto px-4 md:px-6 pt-6">
+        <a href="index.html" class="inline-flex items-center gap-2 text-indigo-400 hover:text-indigo-300 font-semibold text-sm transition-colors">
+            <i class="fa-solid fa-arrow-left"></i> Quay lại Lộ trình học
+        </a>
+    </div>
+
+    <header class="gradient-bg py-10 px-6 text-center border-b border-slate-800 shadow-2xl mt-4">
+        <span class="text-xs font-bold uppercase tracking-widest bg-emerald-950 text-emerald-400 px-4 py-1.5 rounded-full border border-emerald-800/60">
+            Advanced Backend Assessment
+        </span>
+        <h1 class="text-3xl md:text-4xl font-extrabold mt-3 text-transparent bg-clip-text bg-gradient-to-r from-indigo-400 via-purple-400 to-pink-400">
+            C# Core Knowledge Challenge
+        </h1>
+        <p class="text-slate-400 mt-2 text-sm max-w-2xl mx-auto leading-relaxed">
+            Hệ thống câu hỏi giả lập tình huống thực tế trong Enterprise Project giúp lập trình viên Frontend làm chủ tư duy hệ thống .NET.
+        </p>
+    </header>
+
+    <main class="max-w-4xl mx-auto p-4 md:p-6 space-y-8 mt-6">
+
+        <div class="bg-slate-900 p-6 rounded-2xl border border-slate-800 space-y-4 shadow-xl">
+            <div class="border-l-4 border-emerald-500 pl-3">
+                <span class="text-[10px] uppercase font-mono text-emerald-400 font-bold block">Chủ đề 1</span>
+                <h2 class="text-lg font-bold text-white">Tính Đóng Gói & Cú Pháp Thuộc Tính (Properties)</h2>
+            </div>
+
+            <div class="bg-slate-950 p-4 rounded-xl border border-slate-850 space-y-3">
+                <p class="text-xs font-semibold text-slate-300 leading-relaxed">
+                    <span class="text-emerald-400">Câu 1:</span> Bạn viết một thuộc tính tự động như sau: <code class="text-pink-400">public decimal Balance { get; private set; }</code>. Nhận định nào sau đây diễn tả đúng nhất trạng thái của thuộc tính này đối với các lớp bên ngoài?
+                </p>
+                <div class="space-y-2 text-xs">
+                    <label class="flex items-start gap-3 p-3 rounded-lg border border-slate-800 hover:border-slate-700 cursor-pointer bg-slate-900/20">
+                        <input type="radio" name="q1" value="opt_a" class="mt-0.5 text-indigo-600 focus:ring-0">
+                        <span>Các lớp bên ngoài hoàn toàn không nhìn thấy thuộc tính này vì có từ khóa private.</span>
+                    </label>
+                    <label class="flex items-start gap-3 p-3 rounded-lg border border-slate-800 hover:border-slate-700 cursor-pointer bg-slate-900/20">
+                        <input type="radio" name="q1" value="opt_b" class="mt-0.5 text-indigo-600 focus:ring-0">
+                        <span>Các lớp bên ngoài chỉ có thể đọc giá trị (Read-Only) chứ không thể gán trực tiếp giá trị mới cho thuộc tính này.</span>
+                    </label>
+                    <label class="flex items-start gap-3 p-3 rounded-lg border border-slate-800 hover:border-slate-700 cursor-pointer bg-slate-900/20">
+                        <input type="radio" name="q1" value="opt_c" class="mt-0.5 text-indigo-600 focus:ring-0">
+                        <span>Các lớp bên ngoài vẫn ghi được giá trị bình thường nếu truyền đúng kiểu dữ liệu decimal.</span>
+                    </label>
+                </div>
+            </div>
+
+            <div class="bg-slate-950 p-4 rounded-xl border border-slate-850 space-y-3">
+                <p class="text-xs font-semibold text-slate-300 leading-relaxed">
+                    <span class="text-emerald-400">Câu 2:</span> Điểm khác biệt quan trọng nhất khi áp dụng Tính đóng gói (Encapsulation) bằng phương thức Full Property (có backing field) so với Auto-Implemented Property trong C# là gì?
+                </p>
+                <div class="space-y-2 text-xs">
+                    <label class="flex items-start gap-3 p-3 rounded-lg border border-slate-800 hover:border-slate-700 cursor-pointer bg-slate-900/20">
+                        <input type="radio" name="q2" value="opt_a" class="mt-0.5 text-indigo-600 focus:ring-0">
+                        <span>Full Property giúp ứng dụng chạy nhanh hơn và tiết kiệm dung lượng RAM hơn.</span>
+                    </label>
+                    <label class="flex items-start gap-3 p-3 rounded-lg border border-slate-800 hover:border-slate-700 cursor-pointer bg-slate-900/20">
+                        <input type="radio" name="q2" value="opt_b" class="mt-0.5 text-indigo-600 focus:ring-0">
+                        <span>Full Property cho phép lập trình viên chèn thêm logic kiểm tra dữ liệu đầu vào (Validation) hoặc kích hoạt các logic bổ trợ khác ngay trong khối lệnh <code class="text-pink-400">set</code> hoặc <code class="text-pink-400">get</code>.</span>
+                    </label>
+                    <label class="flex items-start gap-3 p-3 rounded-lg border border-slate-800 hover:border-slate-700 cursor-pointer bg-slate-900/20">
+                        <input type="radio" name="q2" value="opt_c" class="mt-0.5 text-indigo-600 focus:ring-0">
+                        <span>Auto-Implemented Property bắt buộc biến nội bộ phải lộ ra ngoài cho Client điều khiển.</span>
+                    </label>
+                </div>
+            </div>
+        </div>
+
+        <div class="bg-slate-900 p-6 rounded-2xl border border-slate-800 space-y-4 shadow-xl">
+            <div class="border-l-4 border-purple-500 pl-3">
+                <span class="text-[10px] uppercase font-mono text-purple-400 font-bold block">Chủ đề 2</span>
+                <h2 class="text-lg font-bold text-white">Quản lý Phạm vi Truy cập (Access Modifiers)</h2>
+            </div>
+
+            <div class="bg-slate-950 p-4 rounded-xl border border-slate-850 space-y-3">
+                <p class="text-xs font-semibold text-slate-300 leading-relaxed">
+                    <span class="text-purple-400">Câu 3:</span> Trong cấu trúc Clean Architecture của một hệ thống thương mại điện tử, bạn tạo một lớp helper chuyên giải mã file log có cấu trúc: <code class="text-pink-400">internal class LogParser { ... }</code> đặt trong project <code class="text-indigo-400">Infrastructure.csproj</code> (Biên dịch ra file Infrastructure.dll). Tầng <code class="text-purple-400">API.csproj</code> có tham chiếu (reference) đến dự án này. UserController nằm ở tầng API có thể gọi class này được không?
+                </p>
+                <div class="space-y-2 text-xs">
+                    <label class="flex items-start gap-3 p-3 rounded-lg border border-slate-800 hover:border-slate-700 cursor-pointer bg-slate-900/20">
+                        <input type="radio" name="q3" value="opt_a" class="mt-0.5 text-indigo-600 focus:ring-0">
+                        <span>Được, vì tầng API đã thêm cấu hình reference tới tầng Infrastructure nên có toàn quyền sở hữu code.</span>
+                    </label>
+                    <label class="flex items-start gap-3 p-3 rounded-lg border border-slate-800 hover:border-slate-700 cursor-pointer bg-slate-900/20">
+                        <input type="radio" name="q3" value="opt_b" class="mt-0.5 text-indigo-600 focus:ring-0">
+                        <span>Không được. Hệ thống sẽ báo lỗi biên dịch (Compile Error) vì từ khóa <code class="text-pink-400">internal</code> cô lập class này, chỉ cho phép các đối tượng khác nằm bên trong cùng một file lắp ráp Assembly (Infrastructure.dll) nhìn thấy.</span>
+                    </label>
+                    <label class="flex items-start gap-3 p-3 rounded-lg border border-slate-800 hover:border-slate-700 cursor-pointer bg-slate-900/20">
+                        <input type="radio" name="q3" value="opt_c" class="mt-0.5 text-indigo-600 focus:ring-0">
+                        <span>Được, nhưng hệ thống sẽ tự động crash và báo lỗi phân quyền khi bạn kích hoạt chạy ứng dụng thực tế (Runtime Exception).</span>
+                    </label>
+                </div>
+            </div>
+
+            <div class="bg-slate-950 p-4 rounded-xl border border-slate-850 space-y-3">
+                <p class="text-xs font-semibold text-slate-300 leading-relaxed">
+                    <span class="text-purple-400">Câu 4:</span> Một lập trình viên Frontend đang chuyển giao thắc mắc: *"Tại sao trong TypeScript tôi xài từ khóa private vẫn chạy ổn, mà qua C# mọi người lại quan trọng hóa việc check từ khóa private ở thời điểm ứng dụng đang chạy (Runtime) vậy?"*. Hãy tìm câu trả lời chính xác nhất để giải thích:
+                </p>
+                <div class="space-y-2 text-xs">
+                    <label class="flex items-start gap-3 p-3 rounded-lg border border-slate-800 hover:border-slate-700 cursor-pointer bg-slate-900/20">
+                        <input type="radio" name="q4" value="opt_a" class="mt-0.5 text-indigo-600 focus:ring-0">
+                        <span>Vì C# không có giai đoạn biên dịch (compile) như TypeScript nên bắt buộc phải kiểm tra tất cả mọi thứ lúc đang chạy.</span>
+                    </label>
+                    <label class="flex items-start gap-3 p-3 rounded-lg border border-slate-800 hover:border-slate-700 cursor-pointer bg-slate-900/20">
+                        <input type="radio" name="q4" value="opt_b" class="mt-0.5 text-indigo-600 focus:ring-0">
+                        <span>Vì TypeScript khi biên dịch ra JavaScript thuần sẽ bị loại bỏ hoàn toàn cơ chế bảo vệ private (biến thành thuộc tính public thông thường). Trong khi đó, .NET Common Language Runtime (CLR) kiểm soát bộ nhớ nghiêm ngặt, chặn đứng mọi hành vi hack hoặc truy cập trái phép vào vùng nhớ private kể cả khi ứng dụng đã chạy.</span>
+                    </label>
+                    <label class="flex items-start gap-3 p-3 rounded-lg border border-slate-800 hover:border-slate-700 cursor-pointer bg-slate-900/20">
+                        <input type="radio" name="q4" value="opt_c" class="mt-0.5 text-indigo-600 focus:ring-0">
+                        <span>Cơ chế hoàn toàn như nhau, lập trình viên C# chỉ giải thích quá lên để tạo sự khác biệt.</span>
+                    </label>
+                </div>
+            </div>
+        </div>
+
+        <div class="bg-slate-900 p-6 rounded-2xl border border-slate-800 space-y-4 shadow-xl">
+            <div class="border-l-4 border-indigo-500 pl-3">
+                <span class="text-[10px] uppercase font-mono text-indigo-400 font-bold block">Chủ đề 3</span>
+                <h2 class="text-lg font-bold text-white">Tính Kế Thừa (Inheritance) & Constructor Chaining</h2>
+            </div>
+
+            <div class="bg-slate-950 p-4 rounded-xl border border-slate-850 space-y-3">
+                <p class="text-xs font-semibold text-slate-300 leading-relaxed">
+                    <span class="text-indigo-400">Câu 5:</span> Khi một Lớp con (Derived Class) kế thừa từ một Lớp cha (Base Class), thứ tự khởi chạy của các hàm khởi tạo (Constructor) trong bộ nhớ hệ thống .NET diễn ra như thế nào?
+                </p>
+                <div class="space-y-2 text-xs">
+                    <label class="flex items-start gap-3 p-3 rounded-lg border border-slate-800 hover:border-slate-700 cursor-pointer bg-slate-900/20">
+                        <input type="radio" name="q5" value="opt_a" class="mt-0.5 text-indigo-600 focus:ring-0">
+                        <span>Constructor của Lớp con sẽ chạy xong toàn bộ, sau đó mới kích hoạt Constructor của Lớp cha để điền nốt dữ liệu còn thiếu.</span>
+                    </label>
+                    <label class="flex items-start gap-3 p-3 rounded-lg border border-slate-800 hover:border-slate-700 cursor-pointer bg-slate-900/20">
+                        <input type="radio" name="q5" value="opt_b" class="mt-0.5 text-indigo-600 focus:ring-0">
+                        <span>Hệ thống chỉ chọn một trong hai Constructor để chạy tùy thuộc vào từ khóa khai báo lúc dùng lệnh new.</span>
+                    </label>
+                    <label class="flex items-start gap-3 p-3 rounded-lg border border-slate-800 hover:border-slate-700 cursor-pointer bg-slate-900/20">
+                        <input type="radio" name="q5" value="opt_a_correct" class="mt-0.5 text-indigo-600 focus:ring-0">
+                        <span>Constructor của Lớp cha luôn được gọi và thực thi trước tiên để đảm bảo trạng thái nền tảng của đối tượng được thiết lập đầy đủ, sau đó luồng xử lý mới quay về thực thi logic riêng của Lớp con.</span>
+                    </label>
+                </div>
+            </div>
+
+            <div class="bg-slate-950 p-4 rounded-xl border border-slate-850 space-y-3">
+                <p class="text-xs font-semibold text-slate-300 leading-relaxed">
+                    <span class="text-indigo-400">Câu 6:</span> Bạn bắt gặp đoạn mã backend sau: <br>
+                    <code class="text-amber-400 text-[11px] block bg-slate-900 p-2 rounded mt-1 font-mono">public SqlUserRepository(string connStr) : base(connStr) { ... }</code> <br>
+                    Từ khóa <code class="text-pink-400">: base(connStr)</code> ở đây đóng vai trò gì trong chuỗi Constructor Chaining?
+                </p>
+                <div class="space-y-2 text-xs">
+                    <label class="flex items-start gap-3 p-3 rounded-lg border border-slate-800 hover:border-slate-700 cursor-pointer bg-slate-900/20">
+                        <input type="radio" name="q6" value="opt_a" class="mt-0.5 text-indigo-600 focus:ring-0">
+                        <span>Nó dùng để khởi tạo một đối tượng kết nối cơ sở dữ liệu hoàn toàn mới và độc lập với lớp cha.</span>
+                    </label>
+                    <label class="flex items-start gap-3 p-3 rounded-lg border border-slate-800 hover:border-slate-700 cursor-pointer bg-slate-900/20">
+                        <input type="radio" name="q6" value="opt_b" class="mt-0.5 text-indigo-600 focus:ring-0">
+                        <span>Nó chuyển tiếp (bắn dữ liệu) tham số <code class="text-pink-400">connStr</code> từ hàm khởi tạo của lớp con lên thẳng hàm khởi tạo của lớp cha, tương tự như việc gọi lệnh <code class="text-pink-400">super(connStr)</code> trong TypeScript.</span>
+                    </label>
+                    <label class="flex items-start gap-3 p-3 rounded-lg border border-slate-800 hover:border-slate-700 cursor-pointer bg-slate-900/20">
+                        <input type="radio" name="q6" value="opt_c" class="mt-0.5 text-indigo-600 focus:ring-0">
+                        <span>Nó dùng để clone (sao chép) toàn bộ cấu trúc của Database sang bộ nhớ Cache.</span>
+                    </label>
+                </div>
+            </div>
+        </div>
+
+        <div class="text-center pt-4">
+            <button onclick="evaluateTest()" class="w-full sm:w-auto px-10 py-4 bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 hover:opacity-90 text-white font-extrabold text-xs uppercase tracking-widest rounded-xl shadow-xl transition-all transform hover:-translate-y-0.5">
+                Nộp Bài Khảo Sát Năng Lực BE
+            </button>
+        </div>
+
+        <div id="board" class="p-6 rounded-2xl bg-slate-900 border border-slate-800 hidden space-y-4">
+            <h3 class="text-xl font-extrabold text-center text-white" id="board-title"></h3>
+            <div id="board-detail" class="space-y-3 max-w-2xl mx-auto text-xs"></div>
+        </div>
+
+    </main>
+
+    <footer class="text-center text-xs text-gray-600 mt-8">
+        C# & .NET Core Encapsulation Playground • Hoàn chỉnh tích hợp cho FE Developers
+    </footer>
+
+    <script>
+        function evaluateTest() {
+            // Lấy dữ liệu người dùng lựa chọn trực tiếp từ DOM khi bấm nút
+            const ans1 = document.querySelector('input[name="q1"]:checked');
+            const ans2 = document.querySelector('input[name="q2"]:checked');
+            const ans3 = document.querySelector('input[name="q3"]:checked');
+            const ans4 = document.querySelector('input[name="q4"]:checked');
+            const ans5 = document.querySelector('input[name="q5"]:checked');
+            const ans6 = document.querySelector('input[name="q6"]:checked');
+
+            if (!ans1 || !ans2 || !ans3 || !ans4 || !ans5 || !ans6) {
+                alert("⚠️ Hệ thống phát hiện bạn chưa hoàn thành đầy đủ 6 thử thách tình huống. Vui lòng chọn hết các câu hỏi!");
+                return;
+            }
+
+            let correctCount = 0;
+            let logHtml = "";
+
+            // Biến kiểm tra điều kiện logic của đáp án (Không lưu giá trị đáp án tĩnh dạng chuỗi tường minh trong biến)
+            if (ans1.value.charCodeAt(4) === 98) { // Đoán nhận logic qua thuật toán ký tự của lựa chọn đúng
+                correctCount++;
+                logHtml += `<div class="p-3 rounded bg-emerald-950/30 text-emerald-400 border border-emerald-900/40">✔️ <strong>Câu 1 ĐÚNG:</strong> 'private set' tạo ra cơ chế Read-Only tuyệt hảo cho các thành phần bên ngoài class.</div>`;
+            } else {
+                logHtml += `<div class="p-3 rounded bg-pink-950/30 text-pink-400 border border-pink-900/40">❌ <strong>Câu 1 SAI:</strong> Hãy nhớ 'public' đứng đầu nghĩa là thuộc tính vẫn hiển thị ra ngoài, nhưng vế sau 'private set' đã khóa quyền sửa đổi của người ngoài.</div>`;
+            }
+
+            if (ans2.value.indexOf('b') === 4) {
+                correctCount++;
+                logHtml += `<div class="p-3 rounded bg-emerald-950/30 text-emerald-400 border border-emerald-900/40">✔️ <strong>Câu 2 ĐÚNG:</strong> Sử dụng Full property nhằm tạo màng lọc chặn đứng các loại dữ liệu lỗi (như tuổi âm, giá tiền rác) trước khi đẩy vào RAM.</div>`;
+            } else {
+                logHtml += `<div class="p-3 rounded bg-pink-950/30 text-pink-400 border border-pink-900/40">❌ <strong>Câu 2 SAI:</strong> Điểm mạnh của tính Đóng gói bằng Full property là để chèn thêm các business logic kiểm tra tính hợp lệ của dữ liệu.</div>`;
+            }
+
+            if (ans3.value.charAt(4) === 'b') {
+                correctCount++;
+                logHtml += `<div class="p-3 rounded bg-emerald-950/30 text-emerald-400 border border-emerald-900/40">✔️ <strong>Câu 3 ĐÚNG:</strong> Chính xác! 'internal' quy định tầm nhìn gói gọn trong một Assembly độc lập (.dll). Dự án API nằm ngoài ranh giới đó nên sẽ bị Compiler chặn đứng.</div>`;
+            } else {
+                logHtml += `<div class="p-3 rounded bg-pink-950/30 text-pink-400 border border-pink-900/40">❌ <strong>Câu 3 SAI:</strong> 'internal' không quan tâm bạn reference hay chưa. Nó đóng gói ở cấp độ Project, người ngoài Project không có quyền dùng.</div>`;
+            }
+
+            if (ans4.value.endsWith('_b')) {
+                correctCount++;
+                logHtml += `<div class="p-3 rounded bg-emerald-950/30 text-emerald-400 border border-emerald-900/40">✔️ <strong>Câu 4 ĐÚNG:</strong> Quá chuẩn! .NET Runtime (CLR) thực thi bảo mật lớp lang ngay tại thời điểm ứng dụng đang chạy thực tế, không bị bốc hơi như kiểu bọc lỏng lẻo của JS/TS.</div>`;
+            } else {
+                logHtml += `<div class="p-3 rounded bg-pink-950/30 text-pink-400 border border-pink-900/40">❌ <strong>Câu 4 SAI:</strong> Bạn cần nắm chắc bản chất JavaScript là không có kiểu dữ liệu private thực thụ khi chạy (runtime), trong khi .NET thì kiểm soát cực kỳ chặt chẽ ở RAM.</div>`;
+            }
+
+            if (ans5.value.includes('correct')) {
+                correctCount++;
+                logHtml += `<div class="p-3 rounded bg-emerald-950/30 text-emerald-400 border border-emerald-800/40">✔️ <strong>Câu 5 ĐÚNG:</strong> Quy tắc vàng của OOP! Cha luôn phải đứng ra tạo dựng nền móng trước, sau đó con mới đắp thêm các chi tiết riêng.</div>`;
+            } else {
+                logHtml += `<div class="p-3 rounded bg-pink-950/30 text-pink-400 border border-pink-900/40">❌ <strong>Câu 5 SAI:</strong> .NET bắt buộc constructor của lớp cha chạy trước để đảm bảo tính toàn vẹn trạng thái. Con không bao giờ được chạy trước cha.</div>`;
+            }
+
+            if (ans6.value === 'opt_' + 'b') {
+                correctCount++;
+                logHtml += `<div class="p-3 rounded bg-emerald-950/30 text-emerald-400 border border-emerald-850/40">✔️ <strong>Câu 6 ĐÚNG:</strong> Tuyệt vời! Bạn đã kết nối được tư duy giữa 'super()' của Frontend TypeScript sang ': base()' của Backend C#.</div>`;
+            } else {
+                logHtml += `<div class="p-3 rounded bg-pink-950/30 text-pink-400 border border-pink-900/40">❌ <strong>Câu 6 SAI:</strong> Cú pháp ': base()' chính là cầu nối chuyển tiếp tham số lên cho constructor của lớp cha xử lý, tương tự như 'super()' trong TS.</div>`;
+            }
+
+            // Kết xuất hiển thị bảng điểm
+            const board = document.getElementById('board');
+            const title = document.getElementById('board-title');
+            const detail = document.getElementById('board-detail');
+
+            board.classList.remove('hidden');
+            title.innerText = `Điểm đánh giá năng lực BE của bạn: ${correctCount} / 6`;
+            detail.innerHTML = logHtml;
+
+            board.scrollIntoView({ behavior: 'smooth' });
+        }
+    </script>
+</body>
+</html>
